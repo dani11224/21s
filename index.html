@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="21 de septiembre — Una flor amarilla para ti. Pequeña experiencia animada con Anime.js." />
+  <title>21 de Septiembre 🌻</title>
+
+  <!-- Google Fonts: Outfit, Playfair Display (estilo de la flor) y Quicksand -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,500;1,500&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./css/flower.css" />
+</head>
+<body>
+
+  <!-- ====================================
+       Escena principal
+       ==================================== -->
+  <div id="scene">
+
+    <!-- Fondo / cielo -->
+    <div id="scene-bg"></div>
+
+    <!-- Suelo -->
+    <div id="ground"></div>
+
+    <!-- ================================
+         Snoopy
+         Se trata como un asset visual completo.
+         Cuando exista snoopy.png, descomentar el <img>
+         y eliminar el placeholder.
+         ================================ -->
+    <div id="snoopy-container">
+      <!-- Asset real (descomentar cuando exista): -->
+      <!-- <img src="./assets/images/snoopy.png" alt="Snoopy" id="snoopy-img" /> -->
+
+      <!-- Placeholder temporal -->
+      <div class="snoopy-placeholder">
+        <span class="snoopy-placeholder-icon">🐕</span>
+        <span class="snoopy-placeholder-label">Snoopy</span>
+      </div>
+    </div>
+
+    <!-- ================================
+         Flor amarilla 3D
+         Se activa dinámicamente al llegar Snoopy
+         para que las animaciones de brote (tallo,
+         hojas, pétalos 3D y luces) comiencen en el
+         momento exacto.
+         ================================ -->
+    <div id="flower-container"></div>
+
+    <!-- Template de la flor original creada por el usuario -->
+    <template id="flower-template">
+      <div class="flower flower--1">
+        <!-- Pétalos 3D + centro texturizado + brillo -->
+        <div class="flower__leafs flower__leafs--1">
+          <div class="flower__leaf flower__leaf--1"></div>
+          <div class="flower__leaf flower__leaf--2"></div>
+          <div class="flower__leaf flower__leaf--3"></div>
+          <div class="flower__leaf flower__leaf--4"></div>
+          <div class="flower__white-circle"></div>
+
+          <!-- Luces flotantes que suben al cielo -->
+          <div class="flower__light flower__light--1"></div>
+          <div class="flower__light flower__light--2"></div>
+          <div class="flower__light flower__light--3"></div>
+          <div class="flower__light flower__light--4"></div>
+          <div class="flower__light flower__light--5"></div>
+          <div class="flower__light flower__light--6"></div>
+          <div class="flower__light flower__light--7"></div>
+          <div class="flower__light flower__light--8"></div>
+        </div>
+
+        <!-- Tallo animado (grow-flower-tree) + hojas escalonadas -->
+        <div class="flower__line">
+          <div class="flower__line__leaf flower__line__leaf--1"></div>
+          <div class="flower__line__leaf flower__line__leaf--2"></div>
+          <div class="flower__line__leaf flower__line__leaf--3"></div>
+          <div class="flower__line__leaf flower__line__leaf--4"></div>
+          <div class="flower__line__leaf flower__line__leaf--5"></div>
+          <div class="flower__line__leaf flower__line__leaf--6"></div>
+        </div>
+      </div>
+    </template>
+
+    <!-- Mensaje final -->
+    <div id="message">
+      <h1>Feliz 21 de septiembre 🌻</h1>
+      <p>Una flor amarilla para ti, porque alguien pensó en ti hoy.</p>
+    </div>
+
+  </div>
+
+  <!-- ====================================
+       JavaScript — ES Modules
+       Anime.js v4 se importa dentro de los
+       módulos JS mediante CDN (esm.sh).
+       ==================================== -->
+  <script type="module" src="./js/main.js"></script>
+
+</body>
+</html>

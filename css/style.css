@@ -1,0 +1,207 @@
+/* ==========================================================
+   21 de Septiembre — Flores Amarillas
+   Estilos principales de la escena
+   ========================================================== */
+
+/* --- Reset mínimo y base --- */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Outfit', 'Quicksand', 'Segoe UI', sans-serif;
+  background-color: #1c1e2e;
+  perspective: 1000px;
+}
+
+/* ==========================================================
+   Escena principal
+   ========================================================== */
+#scene {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  perspective: 1000px;
+}
+
+/* Cielo / fondo decorativo — paleta atardecer suave */
+#scene-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    #1c1e2e 0%,
+    #3d2b52 35%,
+    #8b4a5e 65%,
+    #c48a5a 85%,
+    #d4a95a 100%
+  );
+  opacity: 0;
+  z-index: 0;
+}
+
+/* Suelo con suave relieve */
+#ground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 20%;
+  background: linear-gradient(180deg, #263e23 0%, #1a2c18 100%);
+  border-radius: 50% 50% 0 0 / 20% 20% 0 0;
+  opacity: 0;
+  z-index: 1;
+}
+
+#ground::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: -10%;
+  width: 120%;
+  height: 100%;
+  background: #3d6b35;
+  border-radius: 60% 80% 0 0 / 50% 40% 0 0;
+  opacity: 0.5;
+}
+
+/* ==========================================================
+   Snoopy — Asset visual completo
+   ========================================================== */
+#snoopy-container {
+  position: absolute;
+  bottom: 16%;
+  left: 50%;
+  margin-left: -150px;                 /* A la izquierda del centro */
+  width: clamp(110px, 20vw, 190px);
+  height: auto;
+  z-index: 10;
+  opacity: 0;                           /* Anime.js controla aparición */
+}
+
+/* Imagen real de Snoopy — cuando exista */
+#snoopy-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* --- Placeholder temporal --- */
+.snoopy-placeholder {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  background: rgba(245, 240, 232, 0.9);
+  border: 3px dashed #d4a95a;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4em;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(6px);
+}
+
+.snoopy-placeholder-icon {
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  line-height: 1;
+}
+
+.snoopy-placeholder-label {
+  font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+  color: #8b4a5e;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+/* ==========================================================
+   Flor 3D — Contenedor para la flor del usuario
+   ========================================================== */
+#flower-container {
+  position: absolute;
+  bottom: 16%;
+  left: 50%;
+  margin-left: 30px;                   /* A la derecha de Snoopy */
+  z-index: 10;
+  perspective: 1000px;
+  transform-origin: bottom center;
+}
+
+/* Ajusta la base de la flor para que brote justo desde el suelo */
+#flower-container .flower {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform-origin: bottom center;
+  z-index: 10;
+}
+
+/* ==========================================================
+   Mensaje final
+   ========================================================== */
+#message {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 580px;
+  text-align: center;
+  z-index: 25;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#message h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.4rem, 4.5vw, 2.3rem);
+  font-weight: 500;
+  font-style: italic;
+  color: #f0e6d3;
+  line-height: 1.4;
+  margin-bottom: 0.4em;
+  text-shadow: 0 0 25px rgba(212, 169, 90, 0.5), 0 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+#message p {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(0.95rem, 2.5vw, 1.2rem);
+  font-weight: 400;
+  color: #e2d3be;
+  line-height: 1.6;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+/* ==========================================================
+   Responsive
+   ========================================================== */
+@media (max-width: 600px) {
+  #snoopy-container {
+    bottom: 15%;
+    margin-left: -110px;
+    width: 120px;
+  }
+
+  #flower-container {
+    bottom: 15%;
+    margin-left: 10px;
+    transform: scale(0.85);
+  }
+
+  #ground {
+    height: 18%;
+  }
+
+  #message {
+    top: 7%;
+  }
+}
