@@ -30,45 +30,509 @@ html, body {
   perspective: 1000px;
 }
 
-/* Cielo / fondo decorativo — paleta atardecer suave */
+/* ==========================================================
+   Cielo y Atmósfera Realista
+   ========================================================== */
 #scene-bg {
   position: absolute;
   inset: 0;
+  /* Degradado ultra-suave multi-parada estilo crepúsculo / golden hour */
   background: linear-gradient(
     180deg,
-    #1c1e2e 0%,
-    #3d2b52 35%,
-    #8b4a5e 65%,
-    #c48a5a 85%,
-    #d4a95a 100%
+    #0d111d 0%,
+    #171b2e 15%,
+    #282240 32%,
+    #4a2e4d 50%,
+    #7a3f56 68%,
+    #b05b58 82%,
+    #cb7a52 92%,
+    #dba45f 100%
   );
   opacity: 0;
   z-index: 0;
+  overflow: hidden;
 }
 
-/* Suelo con suave relieve */
+/* Resplandor solar atmosférico tras el horizonte */
+.sky-glow {
+  position: absolute;
+  bottom: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140vw;
+  height: 60vh;
+  background: radial-gradient(
+    ellipse 70% 50% at 50% 90%,
+    rgba(235, 170, 95, 0.45) 0%,
+    rgba(195, 100, 85, 0.25) 45%,
+    rgba(120, 55, 80, 0.1) 70%,
+    transparent 100%
+  );
+  pointer-events: none;
+  filter: blur(15px);
+}
+
+/* ─── SOL DE ATARDECER EN EL HORIZONTE ───────────────── */
+.sunset-sun {
+  position: absolute;
+  bottom: 14%;
+  left: 45%;
+  transform: translateX(-50%);
+  width: clamp(120px, 16vw, 190px);
+  height: clamp(120px, 16vw, 190px);
+  border-radius: 50%;
+  /* Núcleo solar cálido incandescente */
+  background: radial-gradient(
+    circle at center,
+    #fffcee 0%,
+    #ffe293 25%,
+    #fba846 65%,
+    #e86036 100%
+  );
+  /* Corona y resplandor crepuscular multicapa */
+  box-shadow:
+    0 0 25px rgba(255, 235, 170, 0.95),
+    0 0 65px rgba(251, 168, 70, 0.75),
+    0 0 130px rgba(232, 96, 54, 0.5),
+    0 0 220px rgba(186, 75, 88, 0.35);
+  z-index: 1;
+  pointer-events: none;
+  animation: sunPulse 6s ease-in-out infinite alternate;
+}
+
+/* Halo difuso alrededor del sol */
+.sun-halo {
+  position: absolute;
+  inset: -35%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 215, 130, 0.3) 0%,
+    rgba(240, 135, 65, 0.15) 50%,
+    transparent 75%
+  );
+  filter: blur(10px);
+  pointer-events: none;
+}
+
+/* Destello / haz horizontal tenue sobre la línea del horizonte */
+.sun-flare {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 280%;
+  height: 14%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 225, 140, 0.38) 50%,
+    transparent 100%
+  );
+  filter: blur(7px);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+@keyframes sunPulse {
+  0% {
+    box-shadow:
+      0 0 25px rgba(255, 235, 170, 0.95),
+      0 0 65px rgba(251, 168, 70, 0.75),
+      0 0 130px rgba(232, 96, 54, 0.5),
+      0 0 220px rgba(186, 75, 88, 0.35);
+    transform: translateX(-50%) scale(1);
+  }
+  100% {
+    box-shadow:
+      0 0 35px rgba(255, 240, 185, 1),
+      0 0 80px rgba(251, 175, 80, 0.85),
+      0 0 150px rgba(232, 110, 65, 0.6),
+      0 0 250px rgba(186, 75, 88, 0.45);
+    transform: translateX(-50%) scale(1.02);
+  }
+}
+
+/* ─── NUBES VOLUMÉTRICAS DE ATARDECER ─────────────────── */
+.clouds {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.cloud {
+  position: absolute;
+  border-radius: 50px;
+  background: linear-gradient(
+    180deg,
+    rgba(155, 90, 115, 0.52) 0%,
+    rgba(225, 155, 95, 0.45) 100%
+  );
+  filter: blur(4px);
+  box-shadow: 0 6px 25px rgba(210, 130, 80, 0.2);
+}
+
+/* Lóbulos que generan volumen de nube esponjosa */
+.cloud::before,
+.cloud::after {
+  content: '';
+  position: absolute;
+  background: inherit;
+  border-radius: 50%;
+}
+
+.cloud::before {
+  bottom: 20%;
+  left: 18%;
+  width: 50%;
+  height: 150%;
+}
+
+.cloud::after {
+  bottom: 15%;
+  right: 18%;
+  width: 38%;
+  height: 125%;
+}
+
+/* Nube 1: alta izquierda */
+.cloud--1 {
+  top: 14%;
+  left: 6%;
+  width: clamp(170px, 25vw, 300px);
+  height: clamp(34px, 4.5vw, 52px);
+  animation: cloudDrift1 55s ease-in-out infinite alternate;
+}
+
+/* Nube 2: media derecha */
+.cloud--2 {
+  top: 25%;
+  right: 8%;
+  width: clamp(210px, 30vw, 360px);
+  height: clamp(40px, 5.5vw, 62px);
+  animation: cloudDrift2 65s ease-in-out infinite alternate;
+}
+
+/* Nube 3: centro-baja suave */
+.cloud--3 {
+  top: 38%;
+  left: 28%;
+  width: clamp(140px, 20vw, 240px);
+  height: clamp(28px, 4vw, 44px);
+  opacity: 0.8;
+  animation: cloudDrift3 48s ease-in-out infinite alternate;
+}
+
+/* Nube 4: baja derecha con mayor calidez */
+.cloud--4 {
+  top: 48%;
+  right: 22%;
+  width: clamp(180px, 24vw, 280px);
+  height: clamp(32px, 4.2vw, 48px);
+  opacity: 0.7;
+  background: linear-gradient(
+    180deg,
+    rgba(180, 95, 105, 0.45) 0%,
+    rgba(235, 170, 90, 0.48) 100%
+  );
+  animation: cloudDrift4 50s ease-in-out infinite alternate;
+}
+
+@keyframes cloudDrift1 {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(50px); }
+}
+
+@keyframes cloudDrift2 {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-45px); }
+}
+
+@keyframes cloudDrift3 {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(35px); }
+}
+
+@keyframes cloudDrift4 {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-30px); }
+}
+
+/* ─── ESTRELLAS TITILANTES (CENIT) ───────────────────── */
+.stars {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 45%;
+  pointer-events: none;
+}
+
+.star {
+  position: absolute;
+  width: 2.5px;
+  height: 2.5px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+  animation: starTwinkle 3.5s ease-in-out infinite alternate;
+}
+
+.star--1 { top: 8%;  left: 12%; animation-delay: 0s;   width: 3px;   height: 3px; }
+.star--2 { top: 12%; left: 32%; animation-delay: 0.7s; width: 2px;   height: 2px; }
+.star--3 { top: 6%;  left: 54%; animation-delay: 1.4s; }
+.star--4 { top: 15%; left: 74%; animation-delay: 0.9s; width: 2px;   height: 2px; }
+.star--5 { top: 9%;  left: 88%; animation-delay: 1.8s; }
+.star--6 { top: 22%; left: 18%; animation-delay: 2.2s; width: 1.8px; height: 1.8px; }
+.star--7 { top: 18%; left: 62%; animation-delay: 0.4s; }
+.star--8 { top: 26%; left: 44%; animation-delay: 1.6s; width: 2px;   height: 2px; }
+
+@keyframes starTwinkle {
+  0%   { opacity: 0.25; transform: scale(0.85); }
+  100% { opacity: 1;    transform: scale(1.3);  }
+}
+
+/* ─── AVES A LA DISTANCIA ────────────────────────────── */
+.birds {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.bird {
+  position: absolute;
+  width: 18px;
+  height: 10px;
+  opacity: 0;
+  animation: birdFlight 30s linear infinite;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
+}
+
+.bird::before,
+.bird::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 9px;
+  height: 6px;
+  border-top: 2.2px solid rgba(30, 20, 40, 0.82);
+  border-radius: 50% 50% 0 0;
+}
+
+.bird::before {
+  left: 0;
+  transform-origin: right bottom;
+  animation: birdFlapLeft 0.65s ease-in-out infinite alternate;
+}
+
+.bird::after {
+  right: 0;
+  transform-origin: left bottom;
+  animation: birdFlapRight 0.65s ease-in-out infinite alternate;
+}
+
+.bird--1 { top: 20%; animation-delay: 0s;   transform: scale(1); }
+.bird--2 { top: 23%; animation-delay: 1.5s; transform: scale(0.78); }
+.bird--3 { top: 18%; animation-delay: 3s;   transform: scale(0.62); }
+
+@keyframes birdFlapLeft {
+  0%   { transform: rotate(-24deg); }
+  100% { transform: rotate(26deg); }
+}
+
+@keyframes birdFlapRight {
+  0%   { transform: rotate(24deg); }
+  100% { transform: rotate(-26deg); }
+}
+
+@keyframes birdFlight {
+  0%   { left: -40px; opacity: 0; }
+  6%   { opacity: 0.95; }
+  50%  { transform: translateY(-12px); }
+  92%  { opacity: 0.95; }
+  100% { left: 105vw; opacity: 0; transform: translateY(6px); }
+}
+
+/* ==========================================================
+   Suelo y Pasto Natural con Profundidad en Capas
+   ========================================================== */
 #ground {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 20%;
-  background: linear-gradient(180deg, #263e23 0%, #1a2c18 100%);
-  border-radius: 50% 50% 0 0 / 20% 20% 0 0;
+  height: 23%;
   opacity: 0;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Colina trasera — silueta con sutil borde dorado del atardecer */
+.grass-hill--back {
+  position: absolute;
+  bottom: -2%;
+  left: -15%;
+  width: 130%;
+  height: 95%;
+  background: linear-gradient(180deg, #243c20 0%, #152412 100%);
+  border-radius: 55% 75% 0 0 / 45% 40% 0 0;
+  box-shadow: inset 0 2px 10px rgba(225, 175, 95, 0.35);
   z-index: 1;
 }
 
-#ground::before {
-  content: '';
+/* Colina media — da volumen y asimetría natural */
+.grass-hill--mid {
+  position: absolute;
+  bottom: -4%;
+  right: -10%;
+  width: 120%;
+  height: 85%;
+  background: linear-gradient(180deg, #2e4d28 0%, #1b2e17 100%);
+  border-radius: 70% 50% 0 0 / 40% 35% 0 0;
+  box-shadow: inset 0 2px 8px rgba(220, 165, 90, 0.22);
+  z-index: 2;
+  opacity: 0.95;
+}
+
+/* Plano frontal — suelo principal donde apoyan Snoopy y la flor */
+.grass-hill--front {
   position: absolute;
   bottom: 0;
-  left: -10%;
-  width: 120%;
+  left: -5%;
+  width: 110%;
+  height: 72%;
+  background: linear-gradient(180deg, #375b30 0%, #192716 100%);
+  border-radius: 40% 65% 0 0 / 28% 30% 0 0;
+  box-shadow: inset 0 2px 6px rgba(235, 190, 110, 0.28);
+  z-index: 3;
+}
+
+/* Briznas de hierba orgánicas a lo largo del perfil del pasto */
+.grass-blades {
+  position: absolute;
+  bottom: 12%;
+  left: 0;
+  width: 100%;
+  height: 18px;
+  background-image: repeating-linear-gradient(
+    85deg,
+    transparent 0px,
+    transparent 5px,
+    rgba(55, 95, 48, 0.6) 5px,
+    rgba(35, 65, 30, 0.8) 8px,
+    transparent 11px
+  );
+  filter: drop-shadow(0 -2px 3px rgba(220, 170, 90, 0.15));
+  z-index: 4;
+  opacity: 0.75;
+}
+
+/* ==========================================================
+   Casita Roja de Snoopy
+   ========================================================== */
+#doghouse {
+  position: absolute;
+  bottom: 15%;
+  left: clamp(15px, 6vw, 100px);
+  width: clamp(135px, 19vw, 215px);
+  height: auto;
+  z-index: 6;
+  opacity: 0;                           /* Anime.js controla aparición en intro */
+  pointer-events: none;
+  user-select: none;
+  transform-origin: bottom center;
+}
+
+.doghouse-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+}
+
+/* ==========================================================
+   Woodstock (Emilio)
+   ========================================================== */
+#woodstock-container {
+  position: absolute;
+  bottom: 15%;
+  left: clamp(15px, 6vw, 100px);
+  width: clamp(28px, 4vw, 42px);
+  height: clamp(28px, 4vw, 42px);
+  z-index: 12;
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+  transform-origin: center bottom;
+}
+
+#woodstock-body {
+  width: 100%;
   height: 100%;
-  background: #3d6b35;
-  border-radius: 60% 80% 0 0 / 50% 40% 0 0;
-  opacity: 0.5;
+  transform-origin: center bottom;
+}
+
+.woodstock-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.35));
+}
+
+/* Aleteo rápido característico de Woodstock */
+.woodstock-wing {
+  transform-origin: 23px 25px;
+}
+
+.woodstock--flapping .woodstock-wing {
+  animation: woodstockFlap 0.12s ease-in-out infinite alternate;
+}
+
+@keyframes woodstockFlap {
+  0%   { transform: rotate(-25deg) scaleY(0.7); }
+  100% { transform: rotate(35deg) scaleY(1.15); }
+}
+
+/* Balanceo alegre en vuelo */
+.woodstock--flying #woodstock-body {
+  animation: woodstockBob 0.35s ease-in-out infinite alternate;
+}
+
+@keyframes woodstockBob {
+  0%   { transform: translateY(0) rotate(-4deg); }
+  100% { transform: translateY(-7px) rotate(6deg); }
+}
+
+/* ==========================================================
+   Lluvia de Pétalos Amarillos Flotantes
+   ========================================================== */
+#petals-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 8;
+}
+
+.falling-petal {
+  position: absolute;
+  top: -30px;
+  background: radial-gradient(
+    ellipse at 35% 35%,
+    #fff59d 0%,
+    #fdd835 45%,
+    #fbc02d 80%,
+    #f57f17 100%
+  );
+  border-radius: 60% 0 60% 60% / 50% 0 50% 50%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18), inset 0 0 4px rgba(255, 255, 255, 0.6);
+  opacity: 0.88;
+  pointer-events: none;
+  will-change: transform, opacity;
 }
 
 /* ==========================================================
@@ -85,13 +549,42 @@ html, body {
   opacity: 0;                           /* Anime.js controla aparición */
 }
 
-/* Imagen real de Snoopy — cuando exista */
+/* Sombra de contacto en el suelo */
+.ground-shadow {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+  transform-origin: center center;
+}
+
+.snoopy-shadow {
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 68%;
+  height: 14px;
+  background: radial-gradient(
+    ellipse 60% 50% at center,
+    rgba(10, 20, 12, 0.72) 0%,
+    rgba(14, 26, 16, 0.45) 45%,
+    rgba(20, 36, 22, 0.15) 75%,
+    transparent 100%
+  );
+  filter: blur(3px);
+  z-index: 1;
+}
+
+/* Imagen real de Snoopy */
 #snoopy-container img {
+  position: relative;
+  z-index: 2;
   width: 100%;
   height: auto;
   display: block;
   pointer-events: none;
   user-select: none;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.35));
+  transform-origin: bottom center;
 }
 
 /* --- Placeholder temporal --- */
@@ -136,7 +629,14 @@ html, body {
   transform-origin: bottom center;
 }
 
-/* Ajusta la base de la flor para que brote justo desde el suelo */
+/* Ramo de flores (Bouquet) en el suelo */
+#flower-container .flowers {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform-origin: bottom center;
+}
+
 #flower-container .flower {
   position: absolute;
   bottom: 0;
@@ -145,46 +645,304 @@ html, body {
   z-index: 10;
 }
 
-/* ==========================================================
-   Mensaje final
-   ========================================================== */
-#message {
+/* Sombra de contacto en la base del ramo de flores */
+.flower-shadow {
+  bottom: -4px;
+  left: 0;
+  transform: translateX(-50%);
+  width: 65px;
+  height: 15px;
+  background: radial-gradient(
+    ellipse 60% 50% at center,
+    rgba(10, 20, 12, 0.72) 0%,
+    rgba(14, 26, 16, 0.45) 45%,
+    rgba(20, 36, 22, 0.15) 75%,
+    transparent 100%
+  );
+  filter: blur(3px);
+  z-index: 1;
+  opacity: 0;
+}
+
+/* Lazo rojo decorativo atando el ramo */
+#flower-container .bouquet-ribbon {
   position: absolute;
-  top: 10%;
+  bottom: 2.5vmin;
+  left: 0;
+  transform: translateX(-50%);
+  width: clamp(85px, 14vmin, 130px);
+  height: clamp(70px, 11vmin, 105px);
+  z-index: 50;
+  display: block;
+  pointer-events: none;
+  animation: ribbonPop 1.4s 1.2s cubic-bezier(0.25, 1, 0.5, 1) both;
+  transform-origin: center center;
+}
+
+#flower-container .bouquet-ribbon-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
+}
+
+/* ==========================================================
+   Sobre y Carta con Mensaje Guardado
+   ========================================================== */
+.envelope-wrapper {
+  position: absolute;
+  top: 9%;
   left: 50%;
   transform: translateX(-50%);
-  width: 90%;
-  max-width: 580px;
-  text-align: center;
-  z-index: 25;
+  width: clamp(300px, 44vw, 430px);
+  z-index: 45;
   opacity: 0;
+  cursor: pointer;
+  perspective: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  user-select: none;
+  transition: transform 0.3s ease;
+}
+
+.envelope-wrapper:hover {
+  transform: translateX(-50%) translateY(-2px);
+}
+
+.envelope {
+  position: relative;
+  width: 100%;
+  height: clamp(170px, 22vw, 220px);
+  transform-style: preserve-3d;
+}
+
+/* Fondo posterior interior del sobre */
+.envelope__back {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #d8ccb4 0%, #c5b699 100%);
+  border-radius: 12px;
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.55), 0 0 30px rgba(212, 169, 90, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: 1;
+}
+
+/* Carta interior con el mensaje */
+.envelope__letter {
+  position: absolute;
+  left: 5%;
+  top: 5%;
+  width: 90%;
+  background: linear-gradient(170deg, #fffdf8 0%, #faf3e2 100%);
+  border-radius: 8px;
+  padding: clamp(14px, 2.4vw, 20px) clamp(16px, 2.8vw, 24px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25), inset 0 0 0 1px rgba(212, 169, 90, 0.4);
+  z-index: 2;
+  text-align: center;
+  transform: translateY(0);
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.35, 1), box-shadow 0.5s ease;
+  pointer-events: auto;
+}
+
+/* Cuando el sobre está abierto, la carta se desliza hacia arriba */
+.envelope-wrapper.is-open .envelope__letter {
+  transform: translateY(-88px);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45), 0 0 35px rgba(212, 169, 90, 0.35), inset 0 0 0 1.5px rgba(212, 169, 90, 0.6);
+  z-index: 10;
+}
+
+.letter__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: #a47e3b;
+  font-family: 'Outfit', sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  border-bottom: 1px dashed rgba(212, 169, 90, 0.3);
+  padding-bottom: 4px;
+}
+
+.letter__sunflower-badge {
+  font-size: 1.15rem;
+}
+
+.letter__title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.18rem, 3.2vw, 1.75rem);
+  font-weight: 600;
+  font-style: italic;
+  color: #3b2814;
+  line-height: 1.25;
+  margin: 4px 0 6px;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.letter__ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 4px 0 8px;
+}
+
+.ornament-line {
+  display: inline-block;
+  width: 32px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #c89c46, transparent);
+}
+
+.ornament-dot {
+  color: #c89c46;
+  font-size: 0.75rem;
+}
+
+.letter__text {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(0.85rem, 2vw, 1.05rem);
+  font-weight: 400;
+  color: #523e27;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.letter__signature {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(0.75rem, 1.8vw, 0.88rem);
+  color: #8c6a37;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border-top: 1px dashed rgba(212, 169, 90, 0.3);
+  padding-top: 6px;
+}
+
+.letter__signature strong {
+  color: #4a3418;
+  font-weight: 600;
+}
+
+/* Bolsillo frontal del sobre */
+.envelope__pocket {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  border-radius: 12px;
+}
+
+.envelope__pocket::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #ede4d1 0%, #dfd4be 100%);
+  border-radius: 12px;
+  clip-path: polygon(0 40%, 50% 68%, 100% 40%, 100% 100%, 0 100%);
+  box-shadow: inset 0 2px 8px rgba(255, 255, 255, 0.4);
+}
+
+.envelope__pocket::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #e4d7be 0%, #d5c6aa 100%);
+  border-radius: 12px;
+  clip-path: polygon(0 40%, 50% 70%, 0 100%);
+  opacity: 0.7;
+}
+
+/* Solapa superior abatible (con perspectiva 3D) */
+.envelope__flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  z-index: 5;
+  transform-origin: top center;
+  transform-style: preserve-3d;
+  transition: transform 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.envelope__flap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #dfd2b9 0%, #cebe9f 100%);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+/* Cuando abre el sobre: la solapa gira 180 grados hacia arriba */
+.envelope-wrapper.is-open .envelope__flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+/* Sello dorado en la solapa */
+.envelope__seal {
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 40px;
+  z-index: 6;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.45));
+  transition: opacity 0.4s ease, transform 0.5s ease;
+}
+
+.seal-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.envelope-wrapper.is-open .envelope__seal {
+  opacity: 0.35;
+  transform: translateX(-50%) scale(0.85);
+}
+
+/* Indicador de ayuda táctil */
+.envelope__hint {
+  margin-top: 10px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.82rem;
+  color: #f0e6d3;
+  background: rgba(20, 15, 10, 0.55);
+  border: 1px solid rgba(212, 169, 90, 0.4);
+  backdrop-filter: blur(6px);
+  padding: 5px 14px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: opacity 0.3s ease, transform 0.3s ease;
   pointer-events: none;
 }
 
-#message h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(1.4rem, 4.5vw, 2.3rem);
-  font-weight: 500;
-  font-style: italic;
-  color: #f0e6d3;
-  line-height: 1.4;
-  margin-bottom: 0.4em;
-  text-shadow: 0 0 25px rgba(212, 169, 90, 0.5), 0 2px 8px rgba(0, 0, 0, 0.7);
-}
-
-#message p {
-  font-family: 'Outfit', sans-serif;
-  font-size: clamp(0.95rem, 2.5vw, 1.2rem);
-  font-weight: 400;
-  color: #e2d3be;
-  line-height: 1.6;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+.envelope-wrapper:hover .envelope__hint {
+  transform: scale(1.04);
+  border-color: rgba(255, 217, 125, 0.7);
 }
 
 /* ==========================================================
    Responsive
    ========================================================== */
 @media (max-width: 600px) {
+  #doghouse {
+    bottom: 14%;
+    left: 6px;
+    width: 110px;
+  }
+
   #snoopy-container {
     bottom: 15%;
     margin-left: -110px;
@@ -201,7 +959,13 @@ html, body {
     height: 18%;
   }
 
-  #message {
-    top: 7%;
+  .envelope-wrapper {
+    top: 6%;
+    width: 92%;
+    max-width: 330px;
+  }
+
+  .envelope-wrapper.is-open .envelope__letter {
+    transform: translateY(-72px);
   }
 }

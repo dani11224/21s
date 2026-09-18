@@ -21,27 +21,146 @@
        ==================================== -->
   <div id="scene">
 
-    <!-- Fondo / cielo -->
-    <div id="scene-bg"></div>
+    <!-- Fondo / cielo con luz atmosférica, nubes, estrellas y aves -->
+    <div id="scene-bg">
+      <div class="sky-glow"></div>
 
-    <!-- Suelo -->
-    <div id="ground"></div>
+      <!-- Sol de atardecer hundiéndose en el horizonte -->
+      <div class="sunset-sun" aria-hidden="true">
+        <div class="sun-halo"></div>
+        <div class="sun-flare"></div>
+      </div>
+
+      <!-- Nubes volumétricas de atardecer -->
+      <div class="clouds" aria-hidden="true">
+        <div class="cloud cloud--1"></div>
+        <div class="cloud cloud--2"></div>
+        <div class="cloud cloud--3"></div>
+        <div class="cloud cloud--4"></div>
+      </div>
+
+      <!-- Estrellas titilantes en el cenit -->
+      <div class="stars" aria-hidden="true">
+        <div class="star star--1"></div>
+        <div class="star star--2"></div>
+        <div class="star star--3"></div>
+        <div class="star star--4"></div>
+        <div class="star star--5"></div>
+        <div class="star star--6"></div>
+        <div class="star star--7"></div>
+        <div class="star star--8"></div>
+      </div>
+
+      <!-- Aves a la distancia -->
+      <div class="birds" aria-hidden="true">
+        <div class="bird bird--1"></div>
+        <div class="bird bird--2"></div>
+        <div class="bird bird--3"></div>
+      </div>
+    </div>
+
+    <!-- Suelo: Colinas de pasto orgánico en múltiples planos -->
+    <div id="ground">
+      <div class="grass-hill grass-hill--back"></div>
+      <div class="grass-hill grass-hill--mid"></div>
+      <div class="grass-hill grass-hill--front"></div>
+      <div class="grass-blades"></div>
+    </div>
+
+    <!-- ================================
+         Lluvia de Pétalos Amarillos
+         ================================ -->
+    <div id="petals-container" aria-hidden="true"></div>
+
+    <!-- ================================
+         Casita Roja de Snoopy
+         Ubicada en la colina izquierda
+         ================================ -->
+    <div id="doghouse" aria-label="Casita roja de Snoopy">
+      <svg class="doghouse-svg" viewBox="0 0 225 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <filter id="dh-shadow-blur" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="3.5" />
+          </filter>
+        </defs>
+
+        <!-- Sombra en el pasto bajo la casita -->
+        <ellipse cx="115" cy="182" rx="95" ry="14" fill="rgba(10, 22, 12, 0.65)" filter="url(#dh-shadow-blur)" />
+
+        <!-- Pared posterior (cierra la parte de atrás de la casa y el techo) -->
+        <polygon points="80,24 28,66 28,168 100,168 100,74" fill="#781212" stroke="#161616" stroke-width="3.5" stroke-linejoin="round" />
+
+        <!-- Pared lateral izquierda (en sombra, conectada al alero) -->
+        <polygon points="28,66 100,74 100,178 28,168" fill="#a81c1c" stroke="#161616" stroke-width="3.5" stroke-linejoin="round" />
+        <!-- Tablas de madera pared lateral -->
+        <line x1="28" y1="92" x2="100" y2="100" stroke="#7e1414" stroke-width="2.5" />
+        <line x1="28" y1="118" x2="100" y2="126" stroke="#7e1414" stroke-width="2.5" />
+        <line x1="28" y1="144" x2="100" y2="152" stroke="#7e1414" stroke-width="2.5" />
+
+        <!-- Pared frontal (fachada con gablete) -->
+        <polygon points="100,74 150,34 200,74 200,178 100,178" fill="#df2b2b" stroke="#161616" stroke-width="3.5" stroke-linejoin="round" />
+        <!-- Tablas de madera fachada -->
+        <line x1="100" y1="100" x2="200" y2="100" stroke="#b82020" stroke-width="2" />
+        <line x1="100" y1="126" x2="200" y2="126" stroke="#b82020" stroke-width="2" />
+        <line x1="100" y1="152" x2="200" y2="152" stroke="#b82020" stroke-width="2" />
+
+        <!-- Puerta arqueada oscura (interior) -->
+        <path class="doghouse-door" d="M 126 178 L 126 124 A 24 24 0 0 1 174 124 L 174 178 Z" fill="#13141d" stroke="#161616" stroke-width="3.5" stroke-linejoin="round" />
+
+        <!-- Techo: Faldón izquierdo (conecta cumbrera con alero lateral y pared) -->
+        <polygon points="80,22 150,32 92,78 22,68" fill="#c32222" stroke="#161616" stroke-width="3.5" stroke-linejoin="round" />
+
+        <!-- Techo: Moldura y alero frontal derecho -->
+        <polygon points="150,26 210,74 200,80 150,35 98,80 90,74" fill="#ea3838" stroke="#161616" stroke-width="3.5" stroke-linejoin="round" />
+
+        <!-- Borde / cumbrera con luz dorada del atardecer -->
+        <line x1="79" y1="22" x2="150" y2="32" stroke="#ffd97d" stroke-width="2.2" stroke-linecap="round" />
+        <line x1="150" y1="32" x2="209" y2="73" stroke="#ffd97d" stroke-width="1.8" stroke-linecap="round" />
+      </svg>
+    </div>
+
+    <!-- ================================
+         Woodstock (Emilio)
+         ================================ -->
+    <div id="woodstock-container" aria-label="Woodstock">
+      <div id="woodstock-body">
+        <svg class="woodstock-svg" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Patitas -->
+          <line x1="21" y1="36" x2="19" y2="43" stroke="#161616" stroke-width="2" stroke-linecap="round" />
+          <line x1="17" y1="43" x2="22" y2="43" stroke="#161616" stroke-width="2" stroke-linecap="round" />
+          <line x1="27" y1="36" x2="27" y2="43" stroke="#161616" stroke-width="2" stroke-linecap="round" />
+          <line x1="25" y1="43" x2="30" y2="43" stroke="#161616" stroke-width="2" stroke-linecap="round" />
+
+          <!-- Plumas de la cola -->
+          <path d="M 12 30 L 6 34 M 13 32 L 7 38 M 14 34 L 9 41" stroke="#161616" stroke-width="2" stroke-linecap="round" />
+
+          <!-- Cuerpo -->
+          <ellipse cx="23" cy="28" rx="9" ry="8" fill="#ffd128" stroke="#161616" stroke-width="2" />
+
+          <!-- Alita animable con aleteo -->
+          <path class="woodstock-wing" d="M 19 24 C 15 28, 17 34, 23 31 C 26 27, 24 23, 19 24 Z" fill="#ebbe17" stroke="#161616" stroke-width="1.8" />
+
+          <!-- Cuello y cabeza -->
+          <ellipse cx="27" cy="18" rx="8" ry="7.5" fill="#ffd128" stroke="#161616" stroke-width="2" />
+
+          <!-- Plumero / cresta en la cabeza -->
+          <path d="M 23 11 C 21 6, 20 4, 21 2 M 25 11 C 25 5, 26 3, 27 2 M 28 11 C 30 6, 32 4, 33 3" stroke="#161616" stroke-width="2" stroke-linecap="round" />
+
+          <!-- Ojo -->
+          <circle cx="30" cy="17" r="1.5" fill="#161616" />
+
+          <!-- Pico -->
+          <path d="M 34 17 Q 41 18, 38 22 Q 33 21, 33 20 Z" fill="#f59e0b" stroke="#161616" stroke-width="1.8" stroke-linejoin="round" />
+        </svg>
+      </div>
+    </div>
 
     <!-- ================================
          Snoopy
-         Se trata como un asset visual completo.
-         Cuando exista snoopy.png, descomentar el <img>
-         y eliminar el placeholder.
          ================================ -->
     <div id="snoopy-container">
-      <!-- Asset real (descomentar cuando exista): -->
-      <!-- <img src="./assets/images/snoopy.png" alt="Snoopy" id="snoopy-img" /> -->
-
-      <!-- Placeholder temporal -->
-      <div class="snoopy-placeholder">
-        <span class="snoopy-placeholder-icon">🐕</span>
-        <span class="snoopy-placeholder-label">Snoopy</span>
-      </div>
+      <div id="snoopy-shadow" class="ground-shadow snoopy-shadow" aria-hidden="true"></div>
+      <img src="./assets/images/snoopy.png" alt="Snoopy" id="snoopy-img" />
     </div>
 
     <!-- ================================
@@ -51,46 +170,258 @@
          hojas, pétalos 3D y luces) comiencen en el
          momento exacto.
          ================================ -->
-    <div id="flower-container"></div>
+    <div id="flower-container">
+      <div id="flower-shadow" class="ground-shadow flower-shadow" aria-hidden="true"></div>
+    </div>
 
-    <!-- Template de la flor original creada por el usuario -->
+    <!-- Template del Ramo de Girasoles 3D -->
     <template id="flower-template">
-      <div class="flower flower--1">
-        <!-- Pétalos 3D + centro texturizado + brillo -->
-        <div class="flower__leafs flower__leafs--1">
-          <div class="flower__leaf flower__leaf--1"></div>
-          <div class="flower__leaf flower__leaf--2"></div>
-          <div class="flower__leaf flower__leaf--3"></div>
-          <div class="flower__leaf flower__leaf--4"></div>
-          <div class="flower__white-circle"></div>
+      <div class="flowers bouquet">
 
-          <!-- Luces flotantes que suben al cielo -->
-          <div class="flower__light flower__light--1"></div>
-          <div class="flower__light flower__light--2"></div>
-          <div class="flower__light flower__light--3"></div>
-          <div class="flower__light flower__light--4"></div>
-          <div class="flower__light flower__light--5"></div>
-          <div class="flower__light flower__light--6"></div>
-          <div class="flower__light flower__light--7"></div>
-          <div class="flower__light flower__light--8"></div>
+        <!-- ─── GIRASOL 1: Central (más alto, centro del ramo) ─── -->
+        <div class="flower flower--1">
+          <!-- Corona de 16 pétalos 3D + disco negro aterciopelado + luces -->
+          <div class="flower__leafs flower__leafs--1">
+            <div class="flower__leaf flower__leaf--1"></div>
+            <div class="flower__leaf flower__leaf--2"></div>
+            <div class="flower__leaf flower__leaf--3"></div>
+            <div class="flower__leaf flower__leaf--4"></div>
+            <div class="flower__leaf flower__leaf--5"></div>
+            <div class="flower__leaf flower__leaf--6"></div>
+            <div class="flower__leaf flower__leaf--7"></div>
+            <div class="flower__leaf flower__leaf--8"></div>
+            <div class="flower__leaf flower__leaf--9"></div>
+            <div class="flower__leaf flower__leaf--10"></div>
+            <div class="flower__leaf flower__leaf--11"></div>
+            <div class="flower__leaf flower__leaf--12"></div>
+            <div class="flower__leaf flower__leaf--13"></div>
+            <div class="flower__leaf flower__leaf--14"></div>
+            <div class="flower__leaf flower__leaf--15"></div>
+            <div class="flower__leaf flower__leaf--16"></div>
+            <div class="flower__white-circle"></div>
+
+            <!-- Luces flotantes que suben al cielo -->
+            <div class="flower__light flower__light--1"></div>
+            <div class="flower__light flower__light--2"></div>
+            <div class="flower__light flower__light--3"></div>
+            <div class="flower__light flower__light--4"></div>
+            <div class="flower__light flower__light--5"></div>
+            <div class="flower__light flower__light--6"></div>
+            <div class="flower__light flower__light--7"></div>
+            <div class="flower__light flower__light--8"></div>
+          </div>
+
+          <!-- Tallo central erguido con suave respiración orgánica -->
+          <div class="flower__line">
+            <svg class="flower__stem-svg" viewBox="0 0 100 500" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="stem-grad-center" x1="0%" y1="100%" x2="0%" y2="0%">
+                  <stop offset="0%" stop-color="#14757a" />
+                  <stop offset="60%" stop-color="#159faa" />
+                  <stop offset="100%" stop-color="#39c6d6" />
+                </linearGradient>
+              </defs>
+              <path class="flower__stem-path" d="M 50 500 C 49 380, 52 200, 50 10" stroke="url(#stem-grad-center)" />
+            </svg>
+            <div class="flower__line__leaf flower__line__leaf--1"></div>
+            <div class="flower__line__leaf flower__line__leaf--2"></div>
+            <div class="flower__line__leaf flower__line__leaf--3"></div>
+            <div class="flower__line__leaf flower__line__leaf--4"></div>
+            <div class="flower__line__leaf flower__line__leaf--5"></div>
+            <div class="flower__line__leaf flower__line__leaf--6"></div>
+          </div>
         </div>
 
-        <!-- Tallo animado (grow-flower-tree) + hojas escalonadas -->
-        <div class="flower__line">
-          <div class="flower__line__leaf flower__line__leaf--1"></div>
-          <div class="flower__line__leaf flower__line__leaf--2"></div>
-          <div class="flower__line__leaf flower__line__leaf--3"></div>
-          <div class="flower__line__leaf flower__line__leaf--4"></div>
-          <div class="flower__line__leaf flower__line__leaf--5"></div>
-          <div class="flower__line__leaf flower__line__leaf--6"></div>
+        <!-- ─── GIRASOL 2: Lateral derecho (curvatura orgánica en arco hacia la derecha) ─── -->
+        <div class="flower flower--2">
+          <div class="flower__leafs flower__leafs--2">
+            <div class="flower__leaf flower__leaf--1"></div>
+            <div class="flower__leaf flower__leaf--2"></div>
+            <div class="flower__leaf flower__leaf--3"></div>
+            <div class="flower__leaf flower__leaf--4"></div>
+            <div class="flower__leaf flower__leaf--5"></div>
+            <div class="flower__leaf flower__leaf--6"></div>
+            <div class="flower__leaf flower__leaf--7"></div>
+            <div class="flower__leaf flower__leaf--8"></div>
+            <div class="flower__leaf flower__leaf--9"></div>
+            <div class="flower__leaf flower__leaf--10"></div>
+            <div class="flower__leaf flower__leaf--11"></div>
+            <div class="flower__leaf flower__leaf--12"></div>
+            <div class="flower__leaf flower__leaf--13"></div>
+            <div class="flower__leaf flower__leaf--14"></div>
+            <div class="flower__leaf flower__leaf--15"></div>
+            <div class="flower__leaf flower__leaf--16"></div>
+            <div class="flower__white-circle"></div>
+
+            <div class="flower__light flower__light--1"></div>
+            <div class="flower__light flower__light--2"></div>
+            <div class="flower__light flower__light--3"></div>
+            <div class="flower__light flower__light--4"></div>
+            <div class="flower__light flower__light--5"></div>
+          </div>
+
+          <div class="flower__line">
+            <svg class="flower__stem-svg" viewBox="0 0 100 500" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="stem-grad-right" x1="0%" y1="100%" x2="0%" y2="0%">
+                  <stop offset="0%" stop-color="#14757a" />
+                  <stop offset="55%" stop-color="#159faa" />
+                  <stop offset="100%" stop-color="#39c6d6" />
+                </linearGradient>
+              </defs>
+              <!-- Curva botánica suave: nace vertical en la base junto a los demás y se abre en arco elegante -->
+              <path class="flower__stem-path" d="M 50 500 C 50 380, 68 220, 84 10" stroke="url(#stem-grad-right)" />
+            </svg>
+            <div class="flower__line__leaf flower__line__leaf--1"></div>
+            <div class="flower__line__leaf flower__line__leaf--2"></div>
+            <div class="flower__line__leaf flower__line__leaf--3"></div>
+            <div class="flower__line__leaf flower__line__leaf--4"></div>
+          </div>
         </div>
+
+        <!-- ─── GIRASOL 3: Lateral izquierdo (curvatura orgánica orientada hacia Snoopy) ─── -->
+        <div class="flower flower--3">
+          <div class="flower__leafs flower__leafs--3">
+            <div class="flower__leaf flower__leaf--1"></div>
+            <div class="flower__leaf flower__leaf--2"></div>
+            <div class="flower__leaf flower__leaf--3"></div>
+            <div class="flower__leaf flower__leaf--4"></div>
+            <div class="flower__leaf flower__leaf--5"></div>
+            <div class="flower__leaf flower__leaf--6"></div>
+            <div class="flower__leaf flower__leaf--7"></div>
+            <div class="flower__leaf flower__leaf--8"></div>
+            <div class="flower__leaf flower__leaf--9"></div>
+            <div class="flower__leaf flower__leaf--10"></div>
+            <div class="flower__leaf flower__leaf--11"></div>
+            <div class="flower__leaf flower__leaf--12"></div>
+            <div class="flower__leaf flower__leaf--13"></div>
+            <div class="flower__leaf flower__leaf--14"></div>
+            <div class="flower__leaf flower__leaf--15"></div>
+            <div class="flower__leaf flower__leaf--16"></div>
+            <div class="flower__white-circle"></div>
+
+            <div class="flower__light flower__light--1"></div>
+            <div class="flower__light flower__light--2"></div>
+            <div class="flower__light flower__light--3"></div>
+            <div class="flower__light flower__light--4"></div>
+            <div class="flower__light flower__light--5"></div>
+          </div>
+
+          <div class="flower__line">
+            <svg class="flower__stem-svg" viewBox="0 0 100 500" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="stem-grad-left" x1="0%" y1="100%" x2="0%" y2="0%">
+                  <stop offset="0%" stop-color="#14757a" />
+                  <stop offset="55%" stop-color="#159faa" />
+                  <stop offset="100%" stop-color="#39c6d6" />
+                </linearGradient>
+              </defs>
+              <!-- Curva botánica suave hacia la izquierda inclinándose cariñosamente hacia Snoopy -->
+              <path class="flower__stem-path" d="M 50 500 C 50 380, 32 220, 16 10" stroke="url(#stem-grad-left)" />
+            </svg>
+            <div class="flower__line__leaf flower__line__leaf--1"></div>
+            <div class="flower__line__leaf flower__line__leaf--2"></div>
+            <div class="flower__line__leaf flower__line__leaf--3"></div>
+            <div class="flower__line__leaf flower__line__leaf--4"></div>
+          </div>
+        </div>
+
+        <!-- Lazo rojo satinado que ata la base del ramo de girasoles -->
+        <div class="bouquet-ribbon" aria-label="Lazo rojo del ramo">
+          <svg class="bouquet-ribbon-svg" viewBox="0 0 120 90" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="ribbon-red-main" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ff4444" />
+                <stop offset="45%" stop-color="#d61b1b" />
+                <stop offset="100%" stop-color="#8b0d0d" />
+              </linearGradient>
+              <linearGradient id="ribbon-red-dark" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#b51515" />
+                <stop offset="100%" stop-color="#5e0909" />
+              </linearGradient>
+              <linearGradient id="ribbon-gold-trim" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#ffe28a" />
+                <stop offset="100%" stop-color="#d4a338" />
+              </linearGradient>
+            </defs>
+
+            <!-- Cintas colgantes con caída hacia el pasto -->
+            <path d="M 54 44 Q 38 64, 22 84 Q 34 76, 46 78 Q 53 62, 57 46 Z" fill="url(#ribbon-red-dark)" stroke="#161616" stroke-width="2.5" stroke-linejoin="round" />
+            <path d="M 66 44 Q 82 64, 98 84 Q 86 76, 74 78 Q 67 62, 63 46 Z" fill="url(#ribbon-red-main)" stroke="#161616" stroke-width="2.5" stroke-linejoin="round" />
+
+            <!-- Lazo izquierdo del moño -->
+            <path d="M 56 40 C 34 16, 8 18, 10 38 C 12 52, 36 48, 56 42 Z" fill="url(#ribbon-red-main)" stroke="#161616" stroke-width="2.5" stroke-linejoin="round" />
+            <path d="M 22 32 C 18 36, 24 43, 38 38" stroke="url(#ribbon-red-dark)" stroke-width="2.5" fill="none" stroke-linecap="round" />
+
+            <!-- Lazo derecho del moño -->
+            <path d="M 64 40 C 86 16, 112 18, 110 38 C 108 52, 84 48, 64 42 Z" fill="url(#ribbon-red-main)" stroke="#161616" stroke-width="2.5" stroke-linejoin="round" />
+            <path d="M 98 32 C 102 36, 96 43, 82 38" stroke="url(#ribbon-red-dark)" stroke-width="2.5" fill="none" stroke-linecap="round" />
+
+            <!-- Nudo central con volumen -->
+            <ellipse cx="60" cy="41" rx="10" ry="9" fill="url(#ribbon-red-dark)" stroke="#161616" stroke-width="2.5" />
+            <ellipse cx="60" cy="40" rx="8.5" ry="7.5" fill="url(#ribbon-red-main)" />
+            <path d="M 55 38 Q 60 36, 65 38" stroke="url(#ribbon-gold-trim)" stroke-width="2" fill="none" stroke-linecap="round" />
+          </svg>
+        </div>
+
       </div>
     </template>
 
-    <!-- Mensaje final -->
-    <div id="message">
-      <h1>Feliz 21 de septiembre 🌻</h1>
-      <p>Una flor amarilla para ti, porque alguien pensó en ti hoy.</p>
+    <!-- ====================================
+         Sobre con Carta del Mensaje Guardado
+         ==================================== -->
+    <div id="envelope-wrapper" class="envelope-wrapper" role="button" tabindex="0" aria-label="Sobre con carta de dedicatoria. Toca para abrir o guardar.">
+      <div class="envelope" id="envelope">
+        <!-- Fondo interior del sobre -->
+        <div class="envelope__back"></div>
+
+        <!-- Carta con el mensaje que se extrae del sobre -->
+        <div class="envelope__letter" id="envelope-letter">
+          <div class="letter__header">
+            <span class="letter__sunflower-badge">🌻</span>
+            <span class="letter__date">21 de Septiembre</span>
+          </div>
+          <h1 class="letter__title">Feliz 21 de septiembre</h1>
+          <div class="letter__ornament">
+            <span class="ornament-line"></span>
+            <span class="ornament-dot">✦</span>
+            <span class="ornament-line"></span>
+          </div>
+          <p class="letter__text">Una flor amarilla para ti, porque alguien pensó en ti hoy.</p>
+          <div class="letter__signature">
+            <span>Con cariño,</span>
+            <strong>Snoopy & Woodstock 🐾</strong>
+          </div>
+        </div>
+
+        <!-- Bolsillo frontal del sobre -->
+        <div class="envelope__pocket"></div>
+
+        <!-- Solapa superior plegable (animada en 3D) -->
+        <div class="envelope__flap" id="envelope-flap">
+          <div class="envelope__seal" id="envelope-seal">
+            <svg class="seal-svg" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <defs>
+                <linearGradient id="seal-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#f8dc74" />
+                  <stop offset="50%" stop-color="#d49918" />
+                  <stop offset="100%" stop-color="#8c5a05" />
+                </linearGradient>
+              </defs>
+              <circle cx="18" cy="18" r="15" fill="url(#seal-gold)" stroke="#684203" stroke-width="1.5" />
+              <circle cx="18" cy="18" r="6" fill="#462c05" />
+              <!-- Pétalos radiantes en el sello -->
+              <path d="M 18 7 L 18 11 M 18 25 L 18 29 M 7 18 L 11 18 M 25 18 L 29 18 M 10.5 10.5 L 13.5 13.5 M 22.5 22.5 L 25.5 25.5 M 10.5 25.5 L 13.5 22.5 M 22.5 13.5 L 25.5 10.5" stroke="#ffe793" stroke-width="1.8" stroke-linecap="round" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Indicador interactivo para abrir/cerrar -->
+      <div class="envelope__hint" id="envelope-hint">
+        <span class="hint-icon">💌</span>
+        <span class="hint-text">Toca para guardar o abrir la carta</span>
+      </div>
     </div>
 
   </div>

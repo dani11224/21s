@@ -14,6 +14,7 @@
 
 import { animate } from 'https://esm.sh/animejs';
 import { els } from '../scene.js';
+import { revealWoodstock } from './woodstock.js';
 
 /**
  * Fase 1 — Aparece el fondo (cielo degradado).
@@ -32,19 +33,35 @@ export async function fadeInBackground() {
 }
 
 /**
- * Fase 2 — Aparece el suelo.
- *
- * 🎓 delay:
- *    Un pequeño retraso antes de que empiece la animación.
- *    Crea sensación de secuencia sin necesitar un timeline.
+ * Fase 2 — Aparece el suelo y la casita con Woodstock posado en el tejado.
  */
 export async function fadeInGround() {
-  await animate(els.ground, {
-    opacity: [0, 1],
-    duration: 800,
-    delay: 200,
-    ease: 'outQuad',
-  });
+  const promises = [
+    animate(els.ground, {
+      opacity: [0, 1],
+      duration: 800,
+      delay: 200,
+      ease: 'outQuad',
+    })
+  ];
+
+  if (els.doghouse) {
+    promises.push(
+      animate(els.doghouse, {
+        opacity: [0, 1],
+        scale: [0.92, 1],
+        duration: 900,
+        delay: 350,
+        ease: 'outQuad',
+      })
+    );
+  }
+
+  if (els.woodstock) {
+    promises.push(revealWoodstock());
+  }
+
+  await Promise.all(promises);
 }
 
 /**

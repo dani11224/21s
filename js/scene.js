@@ -26,29 +26,39 @@ export const state = {
  * Se rellenan en `prepareScene()`.
  */
 export const els = {
-  scene:     null,
-  bg:        null,
-  ground:    null,
-  snoopy:    null,   // Contenedor — se anima como unidad completa
-  flower:    null,   // Contenedor de la flor
-  message:   null,
+  scene:        null,
+  bg:           null,
+  ground:       null,
+  doghouse:     null,   // Casita roja de Snoopy
+  woodstock:    null,   // Woodstock (Emilio)
+  petals:       null,   // Contenedor de lluvia de pétalos
+  snoopy:       null,   // Contenedor — se anima horizontalmente
+  snoopyImg:    null,   // Imagen interna — para pasitos, rebote e inclinación
+  snoopyShadow: null,   // Sombra de contacto de Snoopy en el suelo
+  flower:       null,   // Contenedor de la flor
+  flowerShadow: null,   // Sombra de contacto de la flor en el suelo
+  message:      null,
+  envelope:     null,
 };
 
 /**
  * Inicializa las referencias DOM.
  * Debe llamarse una sola vez al arrancar.
- *
- * Nota: ya no necesitamos inyectar SVGs. Snoopy es un asset
- * visual completo (imagen o placeholder) y la flor está
- * construida con HTML/CSS directamente en el HTML.
  */
 export function prepareScene() {
-  els.scene   = $('#scene');
-  els.bg      = $('#scene-bg');
-  els.ground  = $('#ground');
-  els.snoopy  = $('#snoopy-container');
-  els.flower  = $('#flower-container');
-  els.message = $('#message');
+  els.scene        = $('#scene');
+  els.bg           = $('#scene-bg');
+  els.ground       = $('#ground');
+  els.doghouse     = $('#doghouse');
+  els.woodstock    = $('#woodstock-container');
+  els.petals       = $('#petals-container');
+  els.snoopy       = $('#snoopy-container');
+  els.snoopyImg    = $('#snoopy-img');
+  els.snoopyShadow = $('#snoopy-shadow');
+  els.flower       = $('#flower-container');
+  els.flowerShadow = $('#flower-shadow');
+  els.envelope     = $('#envelope-wrapper');
+  els.message      = $('#envelope-wrapper');
 
   state.ready = true;
   state.phase = 'intro';
