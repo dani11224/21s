@@ -39,6 +39,7 @@ export const els = {
   flowerShadow: null,   // Sombra de contacto de la flor en el suelo
   message:      null,
   envelope:     null,
+  fireflies:    null,   // Contenedor de luciérnagas doradas
 };
 
 /**
@@ -52,6 +53,7 @@ export function prepareScene() {
   els.doghouse     = $('#doghouse');
   els.woodstock    = $('#woodstock-container');
   els.petals       = $('#petals-container');
+  els.fireflies    = $('#fireflies-container');
   els.snoopy       = $('#snoopy-container');
   els.snoopyImg    = $('#snoopy-img');
   els.snoopyShadow = $('#snoopy-shadow');

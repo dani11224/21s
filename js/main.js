@@ -17,6 +17,7 @@ import { enterSnoopy, presentFlower } from './animations/snoopy.js';
 import { showFlower, showMessage } from './animations/flower.js';
 import { alignWoodstockToRoof } from './animations/woodstock.js';
 import { startPetalsRain } from './animations/petals.js';
+import { startFireflies } from './animations/fireflies.js';
 
 /**
  * Función principal de arranque.
@@ -28,6 +29,9 @@ async function init() {
   prepareScene();
   alignWoodstockToRoof();
   window.addEventListener('resize', alignWoodstockToRoof);
+
+  // Iniciar las luciérnagas doradas para que habiten la atmósfera desde el inicio
+  startFireflies();
 
   // 2. Intro — fade-in del cielo, suelo, casita y Woodstock
   console.log('▶ Iniciando intro...');
