@@ -115,41 +115,58 @@ function hoverWoodstock() {
 /* ═══════════════════════════════════════════════════════
    INTERACCIÓN TÁCTIL: WOODSTOCK
    Al tocar o hacer clic sobre Woodstock, realiza un giro de 360°
-   en el aire con batido de alas y emite notas musicales doradas.
+   en el aire con trayectoria en forma de globo (loop-the-loop estilo cómic):
+   sube acelerando hacia la derecha, hace la curva superior invertido,
+   y baja planeando hacia la izquierda para regresar a su lugar.
    ═══════════════════════════════════════════════════════ */
 let isSpinning = false;
 let lastWoodstockTap = 0;
 
 /**
- * Woodstock reacciona con una pirueta acrobática y notas musicales.
+ * Woodstock reacciona con un giro 360° en forma de globo aerodinámico.
  */
 export function reactWoodstock() {
   if (!els.woodstock) return;
 
-  // 1. Desprender nota musical dorada
+  const acrobatics = els.woodstock.querySelector('#woodstock-acrobatics') || els.woodstock;
+
+  // 1. Desprender nota musical dorada al iniciar el ascenso
   createFloatingNote();
 
-  // 2. Pirueta acrobática 360° si no está girando
+  // 2. Pirueta acrobática en forma de globo
   if (isSpinning) return;
   isSpinning = true;
 
-  // Si el revoloteo suave está activo lo pausamos durante la pirueta
+  // Pausar el revoloteo suave durante el looping
   if (hoverLoop && typeof hoverLoop.pause === 'function') {
     hoverLoop.pause();
   }
 
-  // Pequeño impulso hacia arriba con giro completo de 360 grados
-  const spinAnim = animate(els.woodstock, {
-    rotate: [0, 360],
-    translateY: ['-=22', 0],
-    duration: 650,
-    ease: 'inOutBack',
+  // Segunda nota musical en el punto más alto del bucle
+  setTimeout(() => {
+    if (isSpinning) createFloatingNote();
+  }, 440);
+
+  // Trayectoria orgánica de globo (Peanuts loop-the-loop):
+  // 1. Sube volando hacia la derecha (X: 0 → +32, Y: 0 → -58, Rot: 0 → -85°)
+  // 2. Cúspide del globo invertido en el aire (X: +10, Y: -98, Rot: -180°)
+  // 3. Desciende en curva por la izquierda (X: -30, Y: -45, Rot: -290°)
+  // 4. Se nivela suavemente de regreso en su posición (X: 0, Y: 0, Rot: -360°)
+  const spinAnim = animate(acrobatics, {
+    translateX: [0, 18, 32, 28, 10, -18, -30, -18, 0],
+    translateY: [0, -26, -58, -88, -98, -80, -45, -14, 0],
+    rotate: [0, -30, -85, -140, -180, -235, -290, -335, -360],
+    duration: 960,
+    ease: 'inOutSine',
   });
 
   spinAnim.then(() => {
     isSpinning = false;
-    // Reanudar el suave aleteo en el aire
-    hoverWoodstock();
+    acrobatics.style.transform = '';
+    // Reanudar el aleteo suave
+    if (hoverLoop && typeof hoverLoop.play === 'function') {
+      hoverLoop.play();
+    }
   });
 }
 
