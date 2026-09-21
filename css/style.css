@@ -1367,40 +1367,91 @@ body {
 @media (max-width: 600px) {
   #doghouse {
     bottom: 14%;
-    left: 6px;
-    width: 110px;
+    left: 4px;
+    width: 86px;
+  }
+
+  .envelope-wrapper {
+    bottom: 13.5%;
+    left: 58px;
+    width: 72px;
+    height: 48px;
+  }
+
+  .envelope__hint {
+    bottom: -28px;
+    padding: 2px 7px;
+    font-size: 0.68rem;
+    gap: 4px;
   }
 
   #snoopy-container {
     bottom: 15%;
-    margin-left: -110px;
-    width: 120px;
+    left: 50%;
+    margin-left: -50px;
+    width: clamp(92px, 25vw, 110px);
   }
 
   #flower-container {
     bottom: 15%;
-    margin-left: 10px;
-    transform: scale(0.85);
+    left: 50%;
+    margin-left: 46px;
+    transform: scale(0.9);
   }
 
   #ground {
-    height: 18%;
-  }
-
-  .envelope-wrapper {
-    bottom: 14%;
-    left: 88px;
-    width: 88px;
-    height: 58px;
+    height: 19%;
   }
 
   .letter-card {
-    width: 92%;
-    padding: 18px 14px;
+    width: min(92%, 360px);
+    max-height: 84vh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 18px 16px 14px;
+    border-radius: 12px;
+    margin: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(212, 169, 90, 0.4) transparent;
+  }
+
+  .letter-card::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .letter-card::-webkit-scrollbar-thumb {
+    background: rgba(212, 169, 90, 0.4);
+    border-radius: 4px;
+  }
+
+  .letter__title {
+    font-size: 1.25rem;
+    margin: 2px 0 4px;
+  }
+
+  .letter__ornament {
+    margin: 2px 0 6px;
+    gap: 6px;
+  }
+
+  .ornament-line {
+    width: 24px;
+  }
+
+  .letter__text {
+    font-size: 0.85rem;
+    line-height: 1.48;
+    margin-bottom: 8px;
+    text-align: left;
+  }
+
+  .letter__signature {
+    font-size: 0.78rem;
+    padding-top: 5px;
   }
 
   .distant-landscape {
     bottom: 11%;
-    height: 24%;
+    height: 22%;
   }
 }
