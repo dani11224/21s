@@ -492,11 +492,11 @@ body {
   }
 
   .flower--2 {
-    transform: rotate(11deg);
+    transform: rotate(9deg);
   }
 
   .flower--3 {
-    transform: rotate(-6deg);
+    transform: rotate(-3deg);
   }
 }
 

@@ -1388,14 +1388,14 @@ body {
   #snoopy-container {
     bottom: 15%;
     left: 50%;
-    margin-left: 2px;
+    margin-left: -24px;
     width: clamp(84px, 23vw, 100px);
   }
 
   #flower-container {
     bottom: 15%;
     left: 50%;
-    margin-left: 78px;
+    margin-left: 84px;
     transform: none;
   }
 
