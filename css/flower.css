@@ -28,34 +28,35 @@
   --color-grass-2: #3d6b35;
   --color-grass-3: #4e8a45;
 
-  /* Flor — Girasol */
-  --color-petal: #fddd25;
-  /* Pétalos amarillos */
-  --color-petal-shadow: #c67d0a;
-  /* Pétalo de sombra */
-  /* Centro evidentemente negro del girasol */
-  --color-center-bg: #050403;
-  --color-center-pattern: #0d0a07;
+  /* Flor — Rosa y Blanco */
+  --color-petal: #ffffff;
+  /* Pétalos blanco puro */
+  --color-petal-shadow: #f48fb1;
+  /* Pétalo de sombra rosa suave */
+  --color-center-bg: #fce4ec;
+  /* Centro suave rubor */
+  --color-center-pattern: #ec407a;
+  /* Pistilo / polen rosa */
 
-  /* Vegetación — Tonos verdes botánicos reales de girasol */
-  --color-stem: #286927;
+  /* Vegetación — Tonos verdes botánicos */
+  --color-stem: #1b5e20;
   /* Tallo verde oscuro */
-  --color-stem-light: #55aa48;
+  --color-stem-light: #43a047;
   /* Tallo verde claro */
-  --color-leaf-green: #347d2c;
+  --color-leaf-green: #2e7d32;
   /* Hojas del tallo */
-  --color-leaf-bright: #5cb842;
+  --color-leaf-bright: #66bb6a;
   /* Hojas claras */
-  --color-leaf-dark: #1b4d1b;
+  --color-leaf-dark: #1b5e20;
   /* Ramas */
-  --color-bush: #2d7023;
+  --color-bush: #2e7d32;
   /* Arbustos */
 
   /* Luces */
-  --color-light-warm: rgb(255, 251, 0);
-  /* Luces cálidas */
-  --color-light-cool: #23f0ff;
-  /* Luces frías */
+  --color-light-warm: #ff80ab;
+  /* Luces cálidas rosa */
+  --color-light-cool: #ffffff;
+  /* Luces blancas */
 
   /* Nubes y aves (detalles de fondo con mayor contraste y visibilidad) */
   --color-cloud-top: rgba(150, 85, 110, 0.45);
@@ -517,12 +518,11 @@ body {
   animation: blooming-leaf-left var(--fl-speed) 2s backwards;
 }
 
-/* ─── FLOR 2 — derecha, con curvatura orgánica en arco ── */
+/* ─── FLOR 2 — derecha, inclinada ────────────────────── */
 .flower--2 {
   left: 50%;
-  transform: rotate(4deg);
-  transform-origin: bottom center;
-  animation: moving-flower-2 4.5s ease-in-out infinite alternate;
+  transform: rotate(20deg);
+  animation: moving-flower-2 4s linear infinite;
 }
 
 .flower--2 .flower__line {
@@ -530,86 +530,60 @@ body {
   animation-delay: 0.6s;
 }
 
-.flower--2 .flower__leafs {
-  transform: translate(3.0vmin, 0) rotate(6deg);
-}
-
 .flower--2 .flower__line__leaf--1 {
-  top: 24%;
-  left: 55%;
   animation: blooming-leaf-right var(--fl-speed) 1.9s backwards;
 }
 
 .flower--2 .flower__line__leaf--2 {
-  top: 50%;
-  left: 48%;
   animation: blooming-leaf-right var(--fl-speed) 1.7s backwards;
 }
 
 .flower--2 .flower__line__leaf--3 {
-  top: 18%;
-  left: 15%;
   animation: blooming-leaf-left var(--fl-speed) 1.5s backwards;
 }
 
 .flower--2 .flower__line__leaf--4 {
-  top: 42%;
-  left: 10%;
   animation: blooming-leaf-left var(--fl-speed) 1.3s backwards;
 }
 
-/* ─── FLOR 3 — izquierda, con curvatura orgánica hacia Snoopy ── */
+/* ─── FLOR 3 — izquierda, inclinada opuesta ──────────── */
 .flower--3 {
   left: 50%;
-  transform: rotate(-4deg);
-  transform-origin: bottom center;
-  animation: moving-flower-3 4.2s ease-in-out infinite alternate;
+  transform: rotate(-15deg);
+  animation: moving-flower-3 4s linear infinite;
 }
 
 .flower--3 .flower__line {
-  height: 64vmin;
   animation-delay: 0.9s;
 }
 
-.flower--3 .flower__leafs {
-  transform: translate(-3.0vmin, 0) rotate(-6deg);
-}
-
 .flower--3 .flower__line__leaf--1 {
-  top: 20%;
-  left: 35%;
   animation: blooming-leaf-right var(--fl-speed) 2.5s backwards;
 }
 
 .flower--3 .flower__line__leaf--2 {
-  top: 46%;
-  left: 42%;
   animation: blooming-leaf-right var(--fl-speed) 2.3s backwards;
 }
 
 .flower--3 .flower__line__leaf--3 {
-  top: 25%;
-  left: -5%;
   animation: blooming-leaf-left var(--fl-speed) 2.1s backwards;
 }
 
 .flower--3 .flower__line__leaf--4 {
-  top: 48%;
-  left: 2%;
   animation: blooming-leaf-left var(--fl-speed) 1.9s backwards;
 }
 
 
 /* ═══════════════════════════════════════════════════════
    PÉTALOS 3D
-   16 pétalos radiantes en distribución matemática pura.
+   4 pétalos por flor + 1 pétalo de sombra.
+   Usan rotateX/rotateY para crear profundidad 3D.
    El contenedor .flower__leafs escala de 0→1 (blooming).
    ═══════════════════════════════════════════════════════ */
 
 .flower__leafs {
   position: relative;
   animation: blooming-flower 2s backwards;
-  z-index: 5;
 }
 
 /* Retraso escalonado por flor */
@@ -639,103 +613,86 @@ body {
 }
 
 /* ─── Cada pétalo ─────────────────────────────────────── 
-   Forma esbelta y armónica de girasol, con nervadura central.
-   Base centrada exactamente en el origen (0, 0) para rotación
-   radial pura sin sesgos ni desplazamientos globales.
+   Forma orgánica con border-radius asimétrico.
+   rotateX/rotateY crean la perspectiva 3D.
    ──────────────────────────────────────────────────────── */
 .flower__leaf {
   position: absolute;
-  left: -1.35vmin;
-  top: -9.6vmin;
-  width: 2.7vmin;
-  height: 9.6vmin;
-  border-radius: 50% 50% 25% 25% / 78% 78% 22% 22%;
-  background: linear-gradient(
-    to top,
-    #d97706 0%,
-    #f59e0b 22%,
-    #facc15 65%,
-    #fef08a 100%
-  );
-  transform-origin: center bottom;
-  box-shadow:
-    inset 0 0 0.8vmin rgba(255, 255, 255, 0.45),
-    0 2px 5px rgba(0, 0, 0, 0.22);
-  opacity: 0.98;
-}
-
-/* Nervadura central sutil para textura y armonía botánica */
-.flower__leaf::before {
-  content: '';
-  position: absolute;
+  bottom: 0;
   left: 50%;
-  top: 15%;
-  width: 1px;
-  height: 65%;
-  background: linear-gradient(to top, rgba(180, 100, 10, 0.32), transparent);
-  transform: translateX(-50%);
+  width: 8vmin;
+  height: 11vmin;
+  border-radius: 51% 49% 47% 53% / 44% 45% 55% 69%;
+  background-color: var(--color-petal);
+  transform-origin: bottom center;
+  opacity: 0.96;
+  box-shadow: 
+    inset 0 0 2.2vmin rgba(244, 143, 177, 0.45),
+    inset 0 0 0.8vmin rgba(255, 255, 255, 0.9),
+    0 0 1.5vmin rgba(255, 192, 203, 0.4);
 }
 
-/* ─── Corona botánica de 16 pétalos radiantes (2 capas limpias intercaladas) ─
-   Capa 1 (impares): 8 pétalos en el nivel principal.
-   Capa 2 (pares): 8 pétalos intercalados rítmicamente entre los impares con
-   suave profundidad y sombra natural.
-   ────────────────────────────────────────────────────────────────────────── */
-.flower__leaf--1  { transform: rotate(0deg) translateY(-3.2vmin); z-index: 2; }
-.flower__leaf--2  { transform: rotate(22.5deg) translateY(-2.85vmin) scale(0.94); z-index: 1; filter: brightness(0.93); }
-.flower__leaf--3  { transform: rotate(45deg) translateY(-3.2vmin); z-index: 2; }
-.flower__leaf--4  { transform: rotate(67.5deg) translateY(-2.85vmin) scale(0.94); z-index: 1; filter: brightness(0.93); }
-.flower__leaf--5  { transform: rotate(90deg) translateY(-3.2vmin); z-index: 2; }
-.flower__leaf--6  { transform: rotate(112.5deg) translateY(-2.85vmin) scale(0.94); z-index: 1; filter: brightness(0.93); }
-.flower__leaf--7  { transform: rotate(135deg) translateY(-3.2vmin); z-index: 2; }
-.flower__leaf--8  { transform: rotate(157.5deg) translateY(-2.85vmin) scale(0.94); z-index: 1; filter: brightness(0.93); }
-.flower__leaf--9  { transform: rotate(180deg) translateY(-3.2vmin); z-index: 2; }
-.flower__leaf--10 { transform: rotate(202.5deg) translateY(-2.85vmin) scale(0.94); z-index: 1; filter: brightness(0.93); }
-.flower__leaf--11 { transform: rotate(225deg) translateY(-3.2vmin); z-index: 2; }
-.flower__leaf--12 { transform: rotate(247.5deg) translateY(-2.85vmin) scale(0.94); z-index: 1; filter: brightness(0.93); }
-.flower__leaf--13 { transform: rotate(270deg) translateY(-3.2vmin); z-index: 2; }
-.flower__leaf--14 { transform: rotate(292.5deg) translateY(-2.85vmin) scale(0.94); z-index: 1; filter: brightness(0.93); }
-.flower__leaf--15 { transform: rotate(315deg) translateY(-3.2vmin); z-index: 2; }
-.flower__leaf--16 { transform: rotate(337.5deg) translateY(-2.85vmin) scale(0.94); z-index: 1; filter: brightness(0.93); }
+/* Pétalo 1: frente-derecha */
+.flower__leaf--1 {
+  transform: translate(-10%, 1%) rotateY(40deg) rotateX(-50deg);
+}
+
+/* Pétalo 2: arriba-centro */
+.flower__leaf--2 {
+  transform: translate(-50%, -4%) rotateX(40deg);
+}
+
+/* Pétalo 3: frente-izquierda */
+.flower__leaf--3 {
+  transform: translate(-90%, 0%) rotateY(45deg) rotateX(50deg);
+}
+
+/* Pétalo 4: sombra inferior (más oscuro, más pequeño) */
+.flower__leaf--4 {
+  width: 8vmin;
+  height: 8vmin;
+  transform-origin: bottom left;
+  border-radius: 4vmin 10vmin 4vmin 4vmin;
+  transform: translate(0%, 18%) rotateX(70deg) rotate(-43deg);
+  background-color: var(--color-petal-shadow);
+  z-index: 1;
+  opacity: 0.9;
+  box-shadow: inset 0 0 1.5vmin rgba(233, 30, 99, 0.35);
+}
 
 
 /* ═══════════════════════════════════════════════════════
-   CENTRO DEL GIRASOL
-   Disco negro intenso aterciopelado con semillas finas
+   CENTRO DE LA FLOR
+   Círculo blanco con textura de líneas finas
+   (repeating-linear-gradient) simulando semillas.
    ═══════════════════════════════════════════════════════ */
 
 .flower__white-circle {
   position: absolute;
-  left: 0;
-  top: 0;
-  transform: translate(-50%, -50%);
-  width: 8.5vmin;
-  height: 8.5vmin;
+  left: -3.5vmin;
+  top: -3vmin;
+  width: 9vmin;
+  height: 4vmin;
   border-radius: 50%;
-  background: radial-gradient(
-    circle at center,
-    #040302 0%,
-    #0a0805 50%,
-    #140f0a 82%,
-    #1d160e 100%
-  );
-  box-shadow:
-    0 0 14px rgba(0, 0, 0, 0.95),
-    inset 0 0 16px rgba(0, 0, 0, 0.98),
-    inset 0 0 1.5px rgba(220, 160, 20, 0.35);
-  z-index: 10;
+  background-color: var(--color-center-bg);
 }
 
 .flower__white-circle::after {
   content: "";
   position: absolute;
-  inset: 6%;
-  border-radius: 50%;
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  height: 60%;
+  border-radius: inherit;
   background-image:
-    repeating-radial-gradient(circle at center, rgba(14, 10, 6, 0.98) 0px, rgba(6, 4, 2, 0.98) 2px, rgba(2, 1, 1, 0.98) 4px),
-    repeating-conic-gradient(from 0deg, rgba(0, 0, 0, 0.35) 0deg, transparent 4deg, rgba(0, 0, 0, 0.35) 8deg);
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.98);
+    repeating-linear-gradient(135deg, rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 12px),
+    repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 12px),
+    repeating-linear-gradient(67.5deg, rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 12px),
+    linear-gradient(90deg, var(--color-center-pattern), #f8bbd0);
 }
+
 
 /* ═══════════════════════════════════════════════════════
    LAZO DE LA BASE DEL RAMO (BOUQUET RIBBON)
@@ -780,78 +737,26 @@ body {
 
 
 /* ═══════════════════════════════════════════════════════
-   TALLOS
-   Crecen de 0→height con la animación grow-flower-tree.
-   Paths SVG orgánicos continuos con gradientes botánicos
-   en coordenadas de usuario absoluto (sin huecos ni bandas).
+   TALLO
+   Crece de 0→height con la animación grow-flower-tree.
+   Gradiente lateral para dar volumen cilíndrico.
    ═══════════════════════════════════════════════════════ */
 
 .flower__line {
-  position: relative;
   height: 55vmin;
-  width: 12vmin;
-  left: 50%;
-  transform: translateX(-50%);
+  width: 1.5vmin;
+  background-image:
+    linear-gradient(to left, rgba(0, 0, 0, 0.2), transparent, rgba(255, 255, 255, 0.2)),
+    linear-gradient(to top, transparent 10%, var(--color-stem), var(--color-stem-light));
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.5);
   animation: grow-flower-tree 4s backwards;
-}
-
-.flower--1 .flower__line {
-  height: 70vmin;
-  animation-delay: 0.3s;
-}
-
-.flower--2 .flower__line {
-  height: 60vmin;
-  animation-delay: 0.6s;
-}
-
-.flower--3 .flower__line {
-  height: 64vmin;
-  animation-delay: 0.9s;
-}
-
-.flower__stem-svg {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.flower__stem-path {
-  fill: none;
-  stroke: #2e7127;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 9;
-}
-
-.flower--1 .flower__stem-path {
-  stroke: #2d7b29;
-  stroke: url(#stem-grad-center);
-  stroke-width: 9.5;
-}
-
-.flower--2 .flower__stem-path {
-  stroke: #2d7b29;
-  stroke: url(#stem-grad-right);
-  stroke-width: 8.5;
-}
-
-.flower--3 .flower__stem-path {
-  stroke: #2d7b29;
-  stroke: url(#stem-grad-left);
-  stroke-width: 8.5;
 }
 
 
 /* ═══════════════════════════════════════════════════════
    HOJAS DEL TALLO
-   Formas redondeadas con tonos verdes botánicos opacos,
-   posicionadas en z-index inferior para no cortar el tallo.
+   Formas redondeadas con border-radius grandes,
+   alternando izquierda y derecha a distintas alturas.
    ═══════════════════════════════════════════════════════ */
 
 .flower__line__leaf {
@@ -859,14 +764,12 @@ body {
   --h: calc(var(--w) + 2vmin);
   position: absolute;
   top: 20%;
-  left: 50%;
+  left: 90%;
   width: var(--w);
   height: var(--h);
   border-top-right-radius: var(--h);
   border-bottom-left-radius: var(--h);
-  background-image: linear-gradient(to top, #1b4d1b 0%, #2e7127 40%, var(--color-leaf-bright) 100%);
-  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.28), 0 2px 4px rgba(0, 0, 0, 0.18);
-  z-index: 1;
+  background-image: linear-gradient(to top, rgba(20, 117, 122, 0.4), var(--color-leaf-bright));
 }
 
 /* Hojas derechas */
@@ -880,7 +783,7 @@ body {
 }
 
 .flower__line__leaf--5 {
-  top: 68%;
+  top: 0;
   transform-origin: left;
   transform: rotate(70deg) rotateY(30deg) scale(0.6);
 }
@@ -893,7 +796,7 @@ body {
   border-bottom-left-radius: 0;
   border-top-left-radius: var(--h);
   border-bottom-right-radius: var(--h);
-  left: -50%;
+  left: -460%;
   top: 12%;
   transform: rotate(-70deg) rotateY(30deg);
 }
@@ -903,8 +806,8 @@ body {
 }
 
 .flower__line__leaf--6 {
-  top: 65%;
-  left: -45%;
+  top: -2%;
+  left: -450%;
   transform-origin: right;
   transform: rotate(-70deg) rotateY(30deg) scale(0.6);
 }

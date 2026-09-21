@@ -271,57 +271,19 @@
       <div id="flower-shadow" class="ground-shadow flower-shadow" aria-hidden="true"></div>
     </div>
 
-    <!-- Gradientes botánicos globales de los tallos (activos en el DOM) -->
-    <svg style="position: absolute; width: 0; height: 0; pointer-events: none; overflow: hidden;" aria-hidden="true">
-      <defs>
-        <linearGradient id="stem-grad-center" gradientUnits="userSpaceOnUse" x1="0" y1="600" x2="0" y2="0">
-          <stop offset="0%" stop-color="#143c14" />
-          <stop offset="25%" stop-color="#1c551c" />
-          <stop offset="60%" stop-color="#2d7b29" />
-          <stop offset="100%" stop-color="#4ea244" />
-        </linearGradient>
-        <linearGradient id="stem-grad-right" gradientUnits="userSpaceOnUse" x1="0" y1="600" x2="0" y2="0">
-          <stop offset="0%" stop-color="#143c14" />
-          <stop offset="25%" stop-color="#1c551c" />
-          <stop offset="60%" stop-color="#2d7b29" />
-          <stop offset="100%" stop-color="#4ea244" />
-        </linearGradient>
-        <linearGradient id="stem-grad-left" gradientUnits="userSpaceOnUse" x1="0" y1="600" x2="0" y2="0">
-          <stop offset="0%" stop-color="#143c14" />
-          <stop offset="25%" stop-color="#1c551c" />
-          <stop offset="60%" stop-color="#2d7b29" />
-          <stop offset="100%" stop-color="#4ea244" />
-        </linearGradient>
-      </defs>
-    </svg>
-
-    <!-- Template del Ramo de Girasoles 3D -->
+    <!-- Template de las Flores 3D (DaniCodex) -->
     <template id="flower-template">
       <div class="flowers bouquet">
 
-        <!-- ─── GIRASOL 1: Central (más alto, centro del ramo) ─── -->
+        <!-- ─── FLOR 1: Central (más alta) ─── -->
         <div class="flower flower--1">
-          <!-- Corona de 16 pétalos 3D + disco negro aterciopelado + luces -->
           <div class="flower__leafs flower__leafs--1">
             <div class="flower__leaf flower__leaf--1"></div>
             <div class="flower__leaf flower__leaf--2"></div>
             <div class="flower__leaf flower__leaf--3"></div>
             <div class="flower__leaf flower__leaf--4"></div>
-            <div class="flower__leaf flower__leaf--5"></div>
-            <div class="flower__leaf flower__leaf--6"></div>
-            <div class="flower__leaf flower__leaf--7"></div>
-            <div class="flower__leaf flower__leaf--8"></div>
-            <div class="flower__leaf flower__leaf--9"></div>
-            <div class="flower__leaf flower__leaf--10"></div>
-            <div class="flower__leaf flower__leaf--11"></div>
-            <div class="flower__leaf flower__leaf--12"></div>
-            <div class="flower__leaf flower__leaf--13"></div>
-            <div class="flower__leaf flower__leaf--14"></div>
-            <div class="flower__leaf flower__leaf--15"></div>
-            <div class="flower__leaf flower__leaf--16"></div>
             <div class="flower__white-circle"></div>
 
-            <!-- Luces flotantes que suben al cielo -->
             <div class="flower__light flower__light--1"></div>
             <div class="flower__light flower__light--2"></div>
             <div class="flower__light flower__light--3"></div>
@@ -331,12 +293,7 @@
             <div class="flower__light flower__light--7"></div>
             <div class="flower__light flower__light--8"></div>
           </div>
-
-          <!-- Tallo central erguido con suave respiración orgánica -->
           <div class="flower__line">
-            <svg class="flower__stem-svg" viewBox="0 0 120 600" preserveAspectRatio="none">
-              <path class="flower__stem-path" d="M 60 600 C 59 420, 61 200, 60 0" stroke="url(#stem-grad-center)" />
-            </svg>
             <div class="flower__line__leaf flower__line__leaf--1"></div>
             <div class="flower__line__leaf flower__line__leaf--2"></div>
             <div class="flower__line__leaf flower__line__leaf--3"></div>
@@ -346,25 +303,13 @@
           </div>
         </div>
 
-        <!-- ─── GIRASOL 2: Lateral derecho (curvatura orgánica en arco hacia la derecha) ─── -->
+        <!-- ─── FLOR 2: Lateral derecha (inclinada) ─── -->
         <div class="flower flower--2">
           <div class="flower__leafs flower__leafs--2">
             <div class="flower__leaf flower__leaf--1"></div>
             <div class="flower__leaf flower__leaf--2"></div>
             <div class="flower__leaf flower__leaf--3"></div>
             <div class="flower__leaf flower__leaf--4"></div>
-            <div class="flower__leaf flower__leaf--5"></div>
-            <div class="flower__leaf flower__leaf--6"></div>
-            <div class="flower__leaf flower__leaf--7"></div>
-            <div class="flower__leaf flower__leaf--8"></div>
-            <div class="flower__leaf flower__leaf--9"></div>
-            <div class="flower__leaf flower__leaf--10"></div>
-            <div class="flower__leaf flower__leaf--11"></div>
-            <div class="flower__leaf flower__leaf--12"></div>
-            <div class="flower__leaf flower__leaf--13"></div>
-            <div class="flower__leaf flower__leaf--14"></div>
-            <div class="flower__leaf flower__leaf--15"></div>
-            <div class="flower__leaf flower__leaf--16"></div>
             <div class="flower__white-circle"></div>
 
             <div class="flower__light flower__light--1"></div>
@@ -372,13 +317,11 @@
             <div class="flower__light flower__light--3"></div>
             <div class="flower__light flower__light--4"></div>
             <div class="flower__light flower__light--5"></div>
+            <div class="flower__light flower__light--6"></div>
+            <div class="flower__light flower__light--7"></div>
+            <div class="flower__light flower__light--8"></div>
           </div>
-
           <div class="flower__line">
-            <svg class="flower__stem-svg" viewBox="0 0 120 600" preserveAspectRatio="none">
-              <!-- Curva botánica suave: conecta exactamente con la base de la flor en Y=0 -->
-              <path class="flower__stem-path" d="M 60 600 C 60 420, 78 220, 90 0" stroke="url(#stem-grad-right)" />
-            </svg>
             <div class="flower__line__leaf flower__line__leaf--1"></div>
             <div class="flower__line__leaf flower__line__leaf--2"></div>
             <div class="flower__line__leaf flower__line__leaf--3"></div>
@@ -386,25 +329,13 @@
           </div>
         </div>
 
-        <!-- ─── GIRASOL 3: Lateral izquierdo (curvatura orgánica orientada hacia Snoopy) ─── -->
+        <!-- ─── FLOR 3: Lateral izquierda (inclinada) ─── -->
         <div class="flower flower--3">
           <div class="flower__leafs flower__leafs--3">
             <div class="flower__leaf flower__leaf--1"></div>
             <div class="flower__leaf flower__leaf--2"></div>
             <div class="flower__leaf flower__leaf--3"></div>
             <div class="flower__leaf flower__leaf--4"></div>
-            <div class="flower__leaf flower__leaf--5"></div>
-            <div class="flower__leaf flower__leaf--6"></div>
-            <div class="flower__leaf flower__leaf--7"></div>
-            <div class="flower__leaf flower__leaf--8"></div>
-            <div class="flower__leaf flower__leaf--9"></div>
-            <div class="flower__leaf flower__leaf--10"></div>
-            <div class="flower__leaf flower__leaf--11"></div>
-            <div class="flower__leaf flower__leaf--12"></div>
-            <div class="flower__leaf flower__leaf--13"></div>
-            <div class="flower__leaf flower__leaf--14"></div>
-            <div class="flower__leaf flower__leaf--15"></div>
-            <div class="flower__leaf flower__leaf--16"></div>
             <div class="flower__white-circle"></div>
 
             <div class="flower__light flower__light--1"></div>
@@ -412,13 +343,11 @@
             <div class="flower__light flower__light--3"></div>
             <div class="flower__light flower__light--4"></div>
             <div class="flower__light flower__light--5"></div>
+            <div class="flower__light flower__light--6"></div>
+            <div class="flower__light flower__light--7"></div>
+            <div class="flower__light flower__light--8"></div>
           </div>
-
           <div class="flower__line">
-            <svg class="flower__stem-svg" viewBox="0 0 120 600" preserveAspectRatio="none">
-              <!-- Curva botánica suave hacia la izquierda conectando en Y=0 -->
-              <path class="flower__stem-path" d="M 60 600 C 60 420, 42 220, 30 0" stroke="url(#stem-grad-left)" />
-            </svg>
             <div class="flower__line__leaf flower__line__leaf--1"></div>
             <div class="flower__line__leaf flower__line__leaf--2"></div>
             <div class="flower__line__leaf flower__line__leaf--3"></div>
@@ -426,7 +355,129 @@
           </div>
         </div>
 
-        <!-- Lazo rojo satinado que ata la base del ramo de girasoles -->
+        <!-- Vegetación acompañante de la flor -->
+        <div class="grow-ans" style="--d: 1.2s">
+          <div class="flower__g-long">
+            <div class="flower__g-long__top"></div>
+            <div class="flower__g-long__bottom"></div>
+          </div>
+        </div>
+
+        <div class="growing-grass">
+          <div class="flower__g-right flower__g-right--1">
+            <div class="leaf"></div>
+          </div>
+        </div>
+
+        <div class="growing-grass">
+          <div class="flower__g-right flower__g-right--2">
+            <div class="leaf"></div>
+          </div>
+        </div>
+
+        <div class="grow-ans" style="--d: 2.4s">
+          <div class="flower__g-front">
+            <div class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--1">
+              <div class="flower__g-front__leaf"></div>
+            </div>
+            <div class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--2">
+              <div class="flower__g-front__leaf"></div>
+            </div>
+            <div class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--3">
+              <div class="flower__g-front__leaf"></div>
+            </div>
+            <div class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--4">
+              <div class="flower__g-front__leaf"></div>
+            </div>
+            <div class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--5">
+              <div class="flower__g-front__leaf"></div>
+            </div>
+            <div class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--6">
+              <div class="flower__g-front__leaf"></div>
+            </div>
+            <div class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--7">
+              <div class="flower__g-front__leaf"></div>
+            </div>
+            <div class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--8">
+              <div class="flower__g-front__leaf"></div>
+            </div>
+            <div class="flower__g-front__line"></div>
+          </div>
+        </div>
+
+        <div class="grow-ans" style="--d: 2.8s">
+          <div class="long-g long-g--0">
+            <div class="leaf leaf--0"></div>
+            <div class="leaf leaf--1"></div>
+            <div class="leaf leaf--2"></div>
+            <div class="leaf leaf--3"></div>
+          </div>
+        </div>
+
+        <div class="grow-ans" style="--d: 3s">
+          <div class="long-g long-g--1">
+            <div class="leaf leaf--0"></div>
+            <div class="leaf leaf--1"></div>
+            <div class="leaf leaf--2"></div>
+            <div class="leaf leaf--3"></div>
+          </div>
+        </div>
+
+        <div class="grow-ans" style="--d: 3.2s">
+          <div class="long-g long-g--2">
+            <div class="leaf leaf--0"></div>
+            <div class="leaf leaf--1"></div>
+            <div class="leaf leaf--2"></div>
+            <div class="leaf leaf--3"></div>
+          </div>
+        </div>
+
+        <div class="grow-ans" style="--d: 3.5s">
+          <div class="long-g long-g--3">
+            <div class="leaf leaf--0"></div>
+            <div class="leaf leaf--1"></div>
+            <div class="leaf leaf--2"></div>
+            <div class="leaf leaf--3"></div>
+          </div>
+        </div>
+
+        <div class="grow-ans" style="--d: 3.6s">
+          <div class="long-g long-g--4">
+            <div class="leaf leaf--0"></div>
+            <div class="leaf leaf--1"></div>
+            <div class="leaf leaf--2"></div>
+            <div class="leaf leaf--3"></div>
+          </div>
+        </div>
+
+        <div class="grow-ans" style="--d: 3.8s">
+          <div class="long-g long-g--5">
+            <div class="leaf leaf--0"></div>
+            <div class="leaf leaf--1"></div>
+            <div class="leaf leaf--2"></div>
+            <div class="leaf leaf--3"></div>
+          </div>
+        </div>
+
+        <div class="grow-ans" style="--d: 4s">
+          <div class="long-g long-g--6">
+            <div class="leaf leaf--0"></div>
+            <div class="leaf leaf--1"></div>
+            <div class="leaf leaf--2"></div>
+            <div class="leaf leaf--3"></div>
+          </div>
+        </div>
+
+        <div class="grow-ans" style="--d: 4.2s">
+          <div class="long-g long-g--7">
+            <div class="leaf leaf--0"></div>
+            <div class="leaf leaf--1"></div>
+            <div class="leaf leaf--2"></div>
+            <div class="leaf leaf--3"></div>
+          </div>
+        </div>
+
+        <!-- Lazo rojo satinado que ata la base del ramo de flores -->
         <div class="bouquet-ribbon" aria-label="Lazo rojo del ramo">
           <svg class="bouquet-ribbon-svg" viewBox="0 0 120 90" width="100%" height="100%"
             xmlns="http://www.w3.org/2000/svg">
@@ -588,10 +639,10 @@
           <span class="ornament-line"></span>
         </div>
 
-        <p class="letter__text">Queria darte este detalle. Entiendo el significado de este dia, se que no somos pareja
-          pero igual queria hacerte algo lindo porque te lo mereces, no son reales como me gustaria dartelas pero esto
-          es lo que puedo hacerte desde aca, si no quieres aceptarlas esta bien, seria completamente entendible, solo
-          queria que te sintieras especial este dia.</p>
+        <p class="letter__text">Queria darte este detalle, aunque este dia sea mas para parejas que otra cosa, siento
+          que tu tambien te mereces algo bonito, se que no son flores reales, ni te las puedo dar en persona como me
+          encantaria, pero hacerlo de esta manera es mi forma de mostrarte mi aprecio porque se que mereces esto y
+          MUCHO más. Espero te gusten y te parezcan bonitas.</p>
 
         <div class="letter__signature">
           <span>Con cariño,</span>

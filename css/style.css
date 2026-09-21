@@ -835,12 +835,12 @@ body {
   position: absolute;
   top: -30px;
   background: radial-gradient(ellipse at 35% 35%,
-      #fff59d 0%,
-      #fdd835 45%,
-      #fbc02d 80%,
-      #f57f17 100%);
+      #ffffff 0%,
+      #fce4ec 35%,
+      #f8bbd0 70%,
+      #f48fb1 100%);
   border-radius: 60% 0 60% 60% / 50% 0 50% 50%;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18), inset 0 0 4px rgba(255, 255, 255, 0.6);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15), inset 0 0 4px rgba(255, 255, 255, 0.8);
   opacity: 0.88;
   pointer-events: none;
   will-change: transform, opacity;
