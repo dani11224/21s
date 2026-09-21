@@ -1367,15 +1367,15 @@ body {
 @media (max-width: 600px) {
   #doghouse {
     bottom: 14%;
-    left: 4px;
-    width: 86px;
+    left: 2px;
+    width: 78px;
   }
 
   .envelope-wrapper {
-    bottom: 13.5%;
-    left: 58px;
-    width: 72px;
-    height: 48px;
+    bottom: 13%;
+    left: 48px;
+    width: 66px;
+    height: 44px;
   }
 
   .envelope__hint {
@@ -1388,15 +1388,15 @@ body {
   #snoopy-container {
     bottom: 15%;
     left: 50%;
-    margin-left: -50px;
-    width: clamp(92px, 25vw, 110px);
+    margin-left: 2px;
+    width: clamp(84px, 23vw, 100px);
   }
 
   #flower-container {
     bottom: 15%;
     left: 50%;
-    margin-left: 46px;
-    transform: scale(0.9);
+    margin-left: 86px;
+    transform: scale(0.85);
   }
 
   #ground {

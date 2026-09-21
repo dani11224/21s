@@ -71,7 +71,14 @@ export async function flyWoodstock() {
 
   // Calculamos la distancia hasta colocarse justo arriba de donde brotará la flor
   const wsRect = els.woodstock.getBoundingClientRect();
-  const flowerTargetX = (window.innerWidth * 0.5 + 45) - wsRect.left;
+  let targetX = window.innerWidth * 0.5 + 45;
+  if (els.flower) {
+    const fRect = els.flower.getBoundingClientRect();
+    if (fRect.left > 0) {
+      targetX = fRect.left + 20;
+    }
+  }
+  const flowerTargetX = targetX - wsRect.left;
   const flowerTargetY = -40; // Se eleva en el aire sobre la flor
 
   // 3. Vuelo ondulante y juguetón (típico de Woodstock)

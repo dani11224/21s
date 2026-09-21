@@ -939,6 +939,16 @@ body {
   clip-path: polygon(35% 0, 65% 1%, 100% 100%, 0% 100%);
 }
 
+/* ─── Vegetación silvestre descartada (limpieza del ramo) ─── */
+.grow-ans,
+.growing-grass,
+.flower__g-long,
+.flower__g-right,
+.flower__g-front,
+.long-g {
+  display: none !important;
+}
+
 /* ─── Ramas curvadas grandes ─────────────────────────── */
 .flower__g-right {
   position: absolute;
