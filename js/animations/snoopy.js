@@ -227,3 +227,96 @@ export async function presentFlower() {
   await Promise.all(promises);
   console.log('🐕 Snoopy presenta la flor amarilla');
 }
+
+/* ═══════════════════════════════════════════════════════
+   INTERACCIÓN TÁCTIL: SNOOPY
+   Al tocar o hacer clic sobre Snoopy, da un saltito alegre
+   con squash & stretch y lanza corazoncitos flotantes al cielo.
+   ═══════════════════════════════════════════════════════ */
+let isJumping = false;
+let lastSnoopyTap = 0;
+
+/**
+ * Snoopy reacciona alegremente al ser tocado.
+ */
+export function reactSnoopy() {
+  if (!els.snoopy || !els.snoopyImg) return;
+
+  // 1. Crear corazoncito flotante siempre
+  createFloatingHeart();
+
+  // 2. Saltito alegre si no está ya saltando
+  if (isJumping) return;
+  isJumping = true;
+
+  const jumpAnim = animate(els.snoopyImg, {
+    translateY: [0, -24, 0],
+    scaleX: [1, 0.9, 1.08, 0.97, 1],
+    scaleY: [1, 1.12, 0.9, 1.03, 1],
+    duration: 520,
+    ease: 'outQuad',
+  });
+
+  if (els.snoopyShadow) {
+    animate(els.snoopyShadow, {
+      scaleX: [1, 0.55, 1.22, 1],
+      scaleY: [1, 0.5, 1.18, 1],
+      opacity: [0.7, 0.32, 0.78, 0.7],
+      duration: 520,
+      ease: 'outQuad',
+    });
+  }
+
+  jumpAnim.then(() => {
+    isJumping = false;
+  });
+}
+
+function createFloatingHeart() {
+  if (!els.snoopy) return;
+  const heart = document.createElement('div');
+  heart.className = 'floating-heart';
+  const hearts = ['❤️', '💖', '💕', '✨', '🐾'];
+  heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+
+  const rect = els.snoopy.getBoundingClientRect();
+  const startX = rect.left + rect.width * 0.45 + (Math.random() - 0.5) * 26;
+  const startY = rect.top + 8;
+
+  heart.style.left = `${startX}px`;
+  heart.style.top = `${startY}px`;
+  document.body.appendChild(heart);
+
+  const driftX = (Math.random() - 0.5) * 45;
+  const rot = (Math.random() - 0.5) * 35;
+
+  animate(heart, {
+    translateY: [0, -85 - Math.random() * 35],
+    translateX: [0, driftX],
+    rotate: [0, rot],
+    scale: [0.5, 1.28, 0.95],
+    opacity: [1, 1, 0],
+    duration: 1350,
+    ease: 'outQuad',
+  }).then(() => {
+    heart.remove();
+  });
+}
+
+/**
+ * Inicializa los listeners táctiles y de clic para Snoopy.
+ */
+export function setupSnoopyInteraction() {
+  if (!els.snoopy) return;
+
+  const trigger = (e) => {
+    e.stopPropagation();
+    const now = Date.now();
+    if (now - lastSnoopyTap < 160) return; // Evitar doble disparo touch+click
+    lastSnoopyTap = now;
+    reactSnoopy();
+  };
+
+  els.snoopy.addEventListener('click', trigger);
+  els.snoopy.addEventListener('touchstart', trigger, { passive: true });
+}

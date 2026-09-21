@@ -111,3 +111,93 @@ function hoverWoodstock() {
     ease: 'inOutSine',
   });
 }
+
+/* ═══════════════════════════════════════════════════════
+   INTERACCIÓN TÁCTIL: WOODSTOCK
+   Al tocar o hacer clic sobre Woodstock, realiza un giro de 360°
+   en el aire con batido de alas y emite notas musicales doradas.
+   ═══════════════════════════════════════════════════════ */
+let isSpinning = false;
+let lastWoodstockTap = 0;
+
+/**
+ * Woodstock reacciona con una pirueta acrobática y notas musicales.
+ */
+export function reactWoodstock() {
+  if (!els.woodstock) return;
+
+  // 1. Desprender nota musical dorada
+  createFloatingNote();
+
+  // 2. Pirueta acrobática 360° si no está girando
+  if (isSpinning) return;
+  isSpinning = true;
+
+  // Si el revoloteo suave está activo lo pausamos durante la pirueta
+  if (hoverLoop && typeof hoverLoop.pause === 'function') {
+    hoverLoop.pause();
+  }
+
+  // Pequeño impulso hacia arriba con giro completo de 360 grados
+  const spinAnim = animate(els.woodstock, {
+    rotate: [0, 360],
+    translateY: ['-=22', 0],
+    duration: 650,
+    ease: 'inOutBack',
+  });
+
+  spinAnim.then(() => {
+    isSpinning = false;
+    // Reanudar el suave aleteo en el aire
+    hoverWoodstock();
+  });
+}
+
+function createFloatingNote() {
+  if (!els.woodstock) return;
+  const note = document.createElement('div');
+  note.className = 'floating-note';
+  const notes = ['♪', '♫', '♬', '🎶', '✨'];
+  note.textContent = notes[Math.floor(Math.random() * notes.length)];
+
+  const rect = els.woodstock.getBoundingClientRect();
+  const startX = rect.left + rect.width * 0.5 + (Math.random() - 0.5) * 20;
+  const startY = rect.top;
+
+  note.style.left = `${startX}px`;
+  note.style.top = `${startY}px`;
+  document.body.appendChild(note);
+
+  const driftX = (Math.random() - 0.5) * 40;
+  const rot = (Math.random() - 0.5) * 30;
+
+  animate(note, {
+    translateY: [0, -75 - Math.random() * 30],
+    translateX: [0, driftX],
+    rotate: [0, rot],
+    scale: [0.6, 1.25, 0.9],
+    opacity: [1, 1, 0],
+    duration: 1300,
+    ease: 'outQuad',
+  }).then(() => {
+    note.remove();
+  });
+}
+
+/**
+ * Inicializa los listeners táctiles y de clic para Woodstock.
+ */
+export function setupWoodstockInteraction() {
+  if (!els.woodstock) return;
+
+  const trigger = (e) => {
+    e.stopPropagation();
+    const now = Date.now();
+    if (now - lastWoodstockTap < 160) return; // Evitar doble disparo touch+click
+    lastWoodstockTap = now;
+    reactWoodstock();
+  };
+
+  els.woodstock.addEventListener('click', trigger);
+  els.woodstock.addEventListener('touchstart', trigger, { passive: true });
+}

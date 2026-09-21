@@ -767,9 +767,20 @@ body {
   height: clamp(28px, 4vw, 42px);
   z-index: 12;
   opacity: 0;
-  pointer-events: none;
+  pointer-events: auto;
+  cursor: pointer;
+  touch-action: manipulation;
   user-select: none;
   transform-origin: center bottom;
+}
+
+/* Área táctil ampliada para facilitar tocar a Woodstock en pantallas móviles */
+#woodstock-container::before {
+  content: '';
+  position: absolute;
+  inset: -14px;
+  border-radius: 50%;
+  pointer-events: auto;
 }
 
 #woodstock-body {
@@ -884,7 +895,33 @@ body {
   height: auto;
   z-index: 10;
   opacity: 0;
+  cursor: pointer;
+  touch-action: manipulation;
   /* Anime.js controla aparición */
+}
+
+/* Reacciones interactivas: Corazones (Snoopy) y Notas musicales (Woodstock) */
+.floating-heart {
+  position: fixed;
+  pointer-events: none;
+  font-size: clamp(1.4rem, 4vw, 2.2rem);
+  filter: drop-shadow(0 2px 8px rgba(255, 64, 129, 0.7));
+  z-index: 999;
+  user-select: none;
+  will-change: transform, opacity;
+}
+
+.floating-note {
+  position: fixed;
+  pointer-events: none;
+  font-size: clamp(1.2rem, 3.5vw, 1.9rem);
+  font-family: 'Outfit', sans-serif;
+  font-weight: bold;
+  color: #ffe066;
+  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.9));
+  z-index: 999;
+  user-select: none;
+  will-change: transform, opacity;
 }
 
 /* Sombra de contacto en el suelo */
