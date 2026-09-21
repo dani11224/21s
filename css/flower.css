@@ -470,7 +470,7 @@ body {
 
 @media (max-width: 600px) {
   .flowers {
-    transform: scale(0.72);
+    transform: scale(1.32);
     transform-origin: bottom center;
     margin-bottom: 0;
   }
@@ -480,23 +480,23 @@ body {
   }
 
   .flower--1 .flower__line {
-    height: 52vmin;
+    height: 62vmin;
   }
 
   .flower--2 .flower__line {
-    height: 44vmin;
+    height: 53vmin;
   }
 
   .flower--3 .flower__line {
-    height: 40vmin;
+    height: 48vmin;
   }
 
   .flower--2 {
-    transform: rotate(14deg);
+    transform: rotate(11deg);
   }
 
   .flower--3 {
-    transform: rotate(-7deg);
+    transform: rotate(-6deg);
   }
 }
 
