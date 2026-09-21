@@ -204,5 +204,97 @@ export async function showMessage() {
     }
   });
 
+  // 4. Revelar botón de "Volver a ver" una vez completada la experiencia
+  const replayBtn = document.getElementById('replay-btn');
+  if (replayBtn) {
+    replayBtn.classList.add('is-visible');
+    replayBtn.addEventListener('click', () => {
+      const overlay = document.querySelector('.fade-overlay');
+      if (overlay) overlay.classList.add('fade-overlay--active');
+      setTimeout(() => {
+        window.location.reload();
+      }, 350);
+    });
+  }
+
   console.log('💌 Sobre aterrizado en la casita de Snoopy. Listo para abrir la carta centrada.');
+}
+
+/* ═══════════════════════════════════════════════════════
+   INTERACCIÓN TÁCTIL: RAMO DE FLORES
+   Al tocar o hacer clic sobre el ramo de flores, este hace un
+   suave balanceo orgánico con la brisa y desprende una ráfaga
+   de pétalos y destellos mágicos que flotan hacia arriba.
+   ═══════════════════════════════════════════════════════ */
+let lastFlowerTap = 0;
+let isFlowerSwaying = false;
+
+/**
+ * Inicializa la interactividad táctil para el ramo de flores.
+ */
+export function setupFlowerInteraction() {
+  const flowerContainer = els.flower || document.getElementById('flower-container');
+  if (!flowerContainer) return;
+
+  const trigger = (e) => {
+    // Si hicieron clic en el modal de la carta o en el botón de replay, ignorar
+    if (e.target.closest('#letter-modal') || e.target.closest('#replay-btn')) return;
+
+    const now = Date.now();
+    if (now - lastFlowerTap < 180) return;
+    lastFlowerTap = now;
+
+    // 1. Balanceo elástico del ramo
+    if (!isFlowerSwaying) {
+      isFlowerSwaying = true;
+      flowerContainer.classList.add('flower-container--sway');
+      setTimeout(() => {
+        flowerContainer.classList.remove('flower-container--sway');
+        isFlowerSwaying = false;
+      }, 820);
+    }
+
+    // 2. Ráfaga de pétalos y destellos mágicos desde la copa del ramo
+    burstPetalsFromBouquet();
+  };
+
+  flowerContainer.addEventListener('click', trigger);
+  flowerContainer.addEventListener('touchstart', trigger, { passive: true });
+}
+
+function burstPetalsFromBouquet() {
+  const flowerContainer = els.flower || document.getElementById('flower-container');
+  if (!flowerContainer) return;
+
+  const rect = flowerContainer.getBoundingClientRect();
+  const centerX = rect.left + rect.width * 0.5;
+  const centerY = rect.top + rect.height * 0.25; // Copa de las flores
+
+  const symbols = ['🌸', '✨', '💮', '💖', '⭐', '🌻'];
+
+  for (let i = 0; i < 7; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'floating-heart';
+    particle.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+    particle.style.fontSize = `${1.1 + Math.random() * 0.9}rem`;
+    particle.style.left = `${centerX + (Math.random() - 0.5) * 45}px`;
+    particle.style.top = `${centerY + (Math.random() - 0.5) * 35}px`;
+    document.body.appendChild(particle);
+
+    const driftX = (Math.random() - 0.5) * 70;
+    const driftY = -70 - Math.random() * 55;
+    const rot = (Math.random() - 0.5) * 70;
+
+    animate(particle, {
+      translateX: [0, driftX],
+      translateY: [0, driftY],
+      scale: [0.5, 1.3, 0.8],
+      opacity: [1, 1, 0],
+      rotate: [0, rot],
+      duration: 1200 + Math.random() * 400,
+      ease: 'outQuad',
+    }).then(() => {
+      particle.remove();
+    });
+  }
 }

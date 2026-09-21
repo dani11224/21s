@@ -14,7 +14,7 @@
 import { prepareScene } from './scene.js';
 import { playIntro } from './animations/intro.js';
 import { enterSnoopy, presentFlower, setupSnoopyInteraction } from './animations/snoopy.js';
-import { showFlower, showMessage } from './animations/flower.js';
+import { showFlower, showMessage, setupFlowerInteraction } from './animations/flower.js';
 import { alignWoodstockToRoof, setupWoodstockInteraction } from './animations/woodstock.js';
 import { startPetalsRain } from './animations/petals.js';
 import { startFireflies } from './animations/fireflies.js';
@@ -30,9 +30,10 @@ async function init() {
   alignWoodstockToRoof();
   window.addEventListener('resize', alignWoodstockToRoof);
 
-  // Habilitar interactividad táctil para Snoopy y Woodstock
+  // Habilitar interactividad táctil para Snoopy, Woodstock y el Ramo de flores
   setupSnoopyInteraction();
   setupWoodstockInteraction();
+  setupFlowerInteraction();
 
   // Iniciar las luciérnagas doradas para que habiten la atmósfera desde el inicio
   startFireflies();

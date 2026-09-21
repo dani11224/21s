@@ -5,8 +5,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description"
-    content="21 de septiembre — Una flor amarilla para ti. Pequeña experiencia animada con Anime.js." />
+    content="21 de septiembre — Un detalle especial para ti con Snoopy, Woodstock y flores de atardecer." />
+  <meta name="theme-color" content="#1c1e2e" />
   <title>21 de Septiembre 🌻</title>
+
+  <!-- Favicon temático -->
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌻</text></svg>" />
+
+  <!-- Open Graph / Previsualización para WhatsApp y Mensajes -->
+  <meta property="og:title" content="Feliz 21 de Septiembre 🌻" />
+  <meta property="og:description"
+    content="Un detalle especial para ti con Snoopy, Woodstock y flores de atardecer." />
+  <meta property="og:image" content="./assets/images/snoopy.png" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
 
   <!-- Google Fonts: Outfit, Playfair Display (estilo de la flor) y Quicksand -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -529,6 +542,12 @@
         </div>
       </div>
     </div>
+
+    <!-- Botón flotante para revivir la animación completa -->
+    <button id="replay-btn" class="replay-btn" aria-label="Volver a ver la animación completa">
+      <span class="replay-btn__icon">↺</span>
+      <span class="replay-btn__text">Volver a ver</span>
+    </button>
 
   </div>
 
